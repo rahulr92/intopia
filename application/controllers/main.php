@@ -104,6 +104,7 @@ class Main extends CI_Controller {
 			$post_desc = $row->desc;
 			$post_title = $row->title;
 			$post_user_id = $row->user_id;
+			$post_type = $row->type_id;
 
 			$post_status = ($row->status_id === '1' ? 'Open' : 'Closed');
 			$close_btn =($row->status_id === '1' ? '' : 'disabled');
@@ -114,33 +115,32 @@ class Main extends CI_Controller {
 				$last_period = $row->period;
 				$data .= "<div class='period row'>";
 				$data .= "<h2>Q$last_period Listings</h2>";
-				$data .= "<div class= 'row'>
+				$data .= "
 				<div class='col-md-2'>Displaying</div>
-				<div class='col-md-2'>All</div>
-				<div class='col-md-2'>For Sale</div>
-				<div class='col-md-2'>Wanted</div>
+				<button class='col-md-2 btn btn-primary all_btn'>All</button>
+				<button class='col-md-2 btn btn-primary for_sale'>For Sale</button>
+				<button class='col-md-2 btn btn-primary wanted'>Wanted</button>
 				<div class='col-md-4'>
 				<span>Hide closed</span>
-				<input id = 'Checked1' type='checkbox' name='check1' />
-				</div>
+				<input id = 'Checked1' type='checkbox' class='hide_closed' name='check1' />
 				</div>";
 			}
 
-			$data .= "<div class='post row'>
+			$data .= "<div class='post row type$post_type $post_status'>
 			<h3>$post_title</h3>
 			<div class='col-md-2'>For Sale</div>
 			<div class='col-md-1'>$post_status</div>
 			<div class='col-md-1'>Q1</div>
-			<div class='col-md-8'>
-			<button class='desc_btn btn col-md-2' id=''>Details</button>
+			
+			<button class='desc_btn btn btn-primary col-md-2' id=''>Details</button>
 			<div class='col-md-2'>
-		<button class='reply_btn btn' id=''>Reply</button>
+		<button class='reply_btn btn btn-primary' id=''>Reply</button>
 		<form class='reply_frm' method='post' action='$msg_url'/>
 		<input type='hidden' name='post_id' value='$post_id'/>
 		<input type='hidden' name='post_user_id' value='$post_user_id'/> 
 		<input type='hidden' name='user_id' value='$user_id'/>
 		<textarea name='msg' class='row' rows='2' cols='100'>message</textarea></br>
-		<input type='submit' value='Send' $close_btn>
+		<input type='submit' class='btn btn-success' value='Send' $close_btn>
 		</form></div>";
 			if($user_id === $row->user_id)
 			{
@@ -157,7 +157,7 @@ class Main extends CI_Controller {
 
 				$data .= $admin_options;
 			}
-			$data .="</div><div class='row desc $post_id'><p>$post_desc</p>
+			$data .="<div class='row desc $post_id'><p>$post_desc</p>
 					</div>
 			</div>";
 		}
