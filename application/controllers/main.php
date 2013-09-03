@@ -50,6 +50,44 @@ class Main extends CI_Controller {
 		redirect('/login/','location',301);
 	}
 
+	public function close()
+	{
+		$post_id=$this->input->post('post_id');
+		$this->Model->close($post_id);
+		redirect('/main/','location',301);
+
+	}
+
+	public function delete()
+	{
+		$post_id=$this->input->post('post_id');
+		$this->Model->delete($post_id);
+		redirect('/main/','location',301);
+
+	}
+
+	// 	public function reply()
+	// {
+	// 	$Details  = array('post_id' =>$this->input->post('post_id') ,'post_user_id' =$this->input->post('post_user_id'));
+	// 	$data = array('title' => 'Register','main_content' => 'register_v', 'details' => $Details);
+	// 	$this->load->view('template',$data);
+
+	// }
+
+	 	public function reply()
+	{
+		$this->Model->reply();
+		// echo "<script type='text/javascript'>reply_sent();</script>";
+		//redirect('/main/','location',301);
+	}
+
+	 public function get_user_posts()
+	{
+		$user_id = $this->session->userdata('user_id');
+		$postings = $this->Model->get_posts_by_user($user_id);
+		return $postings;
+	}
+
 	public function get_posts()
 	{	
 		$period = array();
@@ -57,13 +95,18 @@ class Main extends CI_Controller {
 		$postings = $this->Model->get_posts();
 		$data = "";
 		$last_period = 0;
+		$close_url = base_url('index.php/main/close');
+		$delete_url = base_url('index.php/main/delete');
+		$msg_url = base_url('index.php/main/reply');
 
-		$admin_options = "<div class='col-md-2'>Close</div>
-		<div class='col-md-2'>Delete</div>";
 		foreach ($postings->result() as $row) {
 			$post_id = $row->post_id;
 			$post_desc = $row->desc;
 			$post_title = $row->title;
+			$post_user_id = $row->user_id;
+
+			$post_status = ($row->status_id === '1' ? 'Open' : 'Closed');
+			$close_btn =($row->status_id === '1' ? '' : 'disabled');
 			if($row->period !== $last_period)
 			{
 				if($last_period !== 0)
@@ -86,13 +129,34 @@ class Main extends CI_Controller {
 			$data .= "<div class='post row'>
 			<h3>$post_title</h3>
 			<div class='col-md-2'>For Sale</div>
-			<div class='col-md-1'>Open</div>
+			<div class='col-md-1'>$post_status</div>
 			<div class='col-md-1'>Q1</div>
 			<div class='col-md-8'>
-			<div class='col-md-2'>Details</div>
-			<div class='col-md-2'>Reply</div>";
+			<button class='desc_btn btn col-md-2' id=''>Details</button>
+			<div class='col-md-2'>
+		<button class='reply_btn btn' id=''>Reply</button>
+		<form class='reply_frm' method='post' action='$msg_url'/>
+		<input type='hidden' name='post_id' value='$post_id'/>
+		<input type='hidden' name='post_user_id' value='$post_user_id'/> 
+		<input type='hidden' name='user_id' value='$user_id'/>
+		<textarea name='msg' class='row' rows='2' cols='100'>message</textarea></br>
+		<input type='submit' value='Send' $close_btn>
+		</form></div>";
 			if($user_id === $row->user_id)
+			{
+		$admin_options = "<div class='col-md-2'>
+		<form method='post' action='$close_url'/>
+		<input type='hidden' name='post_id' value='$post_id'/>
+		<input type='submit' value='Close' $close_btn>
+		</form></div>
+		<div class='col-md-2'>
+		<form method='post' action='$delete_url'/>
+		<input type='hidden' name='post_id' value='$post_id'/>
+		<input type='submit' value='Delete'>
+		</form></div>";
+
 				$data .= $admin_options;
+			}
 			$data .="</div><div class='row desc $post_id'><p>$post_desc</p>
 					</div>
 			</div>";
