@@ -1,6 +1,7 @@
 $(function() {
      $('.reply_frm').hide();
      $('.desc').hide();
+
     });
 
 $('.reply_btn').click( function(){
@@ -28,7 +29,17 @@ $(function() {
      });
     });
 
-
+var p5_desc = "lorem Ipsum";
+$(function() {
+     $('.post_row').click(function(){
+      console.log(window.user_id);
+      var desc_var = $(this).attr('id')+'_desc';
+      var desc =  window[desc_var];
+          $('#modal-desc').html(desc);
+          
+    $('#myModal').modal('show');
+     });
+    });
 
 function reply_sent(){
 	alert("Reply sent successfully!");

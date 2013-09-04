@@ -21,7 +21,6 @@
             <link rel="stylesheet" href="<?php echo base_url('css/bootstrap-theme.min.css'); ?>"/>
             <link rel="stylesheet" href="<?php echo base_url('css/normalize.css'); ?>">
             <link rel="stylesheet" href="<?php echo base_url('css/main.css'); ?>">
-            <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
             <script src="<?php echo base_url('js/vendor/modernizr-2.6.2.min.js'); ?>"></script>
         </head>
         <body>
@@ -63,6 +62,8 @@
             <script>window.jQuery || document.write('<script src="<?php echo base_url('js/vendor/jquery-1.9.1.min.js'); ?>"><\/script>')</script>
             <script src="<?php echo base_url('js/plugins.js'); ?>"></script>
             <script src="<?php echo base_url('js/main.js'); ?>"></script>
+            <script src="<?php echo base_url('js/vendor/bootstrap.min.js'); ?>"></script>
+
 
             <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
             <script>
