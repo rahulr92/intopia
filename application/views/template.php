@@ -43,7 +43,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href"<?php echo base_url('index.php/main'); ?>">Home</a></li>
                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/posting')."'>New Post</a>"; } ?></li>
-                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/list_mails')."'>Messages</a>"; } ?></li>
+                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/emails/list_mails')."'>Messages</a>"; } ?></li>
                          <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/logout')."'>Logout</a>"; } ?></li>
               </ul>
             </div><!--/.navbar-collapse -->

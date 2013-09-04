@@ -1,6 +1,7 @@
 <?php
 $user_id = $this->session->userdata('user_id');
 //echo "<h1>Welcome $uname!</h1>";
+$msg_url = base_url('index.php/main/reply_test');
 ?>
 
   <!-- Button trigger modal -->
@@ -17,12 +18,12 @@ $user_id = $this->session->userdata('user_id');
         <div class="modal-body">
           <p id="modal-desc">In arcu in enim ut porttitor magnis ultricies velit auctor cras tortor ac lorem proin turpis lorem odio enim natoque! Tincidunt? Enim. Mid nisi dis, porttitor. Tortor cras pid integer urna tincidunt! Augue mid magna, sagittis lorem pellentesque enim arcu, nascetur ut in dignissim, dolor ac et platea, sed ac lundium tincidunt? Enim? Ut augue placerat, in sed ultricies! Ultrices? Nisi! Diam? Sagittis! Rhoncus, dignissim tincidunt. Scelerisque ut et ut amet, porttitor ac pellentesque cum, mus rhoncus turpis? Aliquet dolor. Vut mattis, diam nunc aenean lundium, montes amet! Cum ut! Pellentesque odio amet duis in vel, pulvinar scelerisque, eu, pid nunc dis et pid aliquet pulvinar tempor quis, mattis ac mid scelerisque! Dis et ac phasellus velit aliquet! In integer</p>
         <hr>
-        <div class="non_owner hide">
+        <div class="non_owner">
         <h3>Reply</h3>
-        <form class='' method='post' action='$msg_url'/>
-		<input type='hidden' name='post_id' value='$post_id'/>
-		<input type='hidden' name='post_user_id' value='$post_user_id'/> 
-		<input type='hidden' name='user_id' value='$user_id'/>
+        <form class='' method='post' action='<?php echo $msg_url; ?>'/>
+		<input type='hidden' name='post_id' id='post_id' value=''/>
+		<input type='hidden' name='post_user_id' id='post_user_id' value=''/> 
+		<input type='hidden' name='user_id' id='user_id'  value=''/>
 		<textarea name='msg' class='' rows='2' cols='60'>Message</textarea></br>
 		<span>Make anonymous</span>
 		<input id = 'Checked1' type='checkbox' class='hide_closed' name='check1' /></br>
@@ -55,33 +56,33 @@ $user_id = $this->session->userdata('user_id');
 <table class="table">
               <thead>
                 <tr>
-                  <th>Offer type</th>
+                  <th>Offer type</br><select class="type-select" data-quarter="q1"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
                   <th>Title</th>
                   <th>Posted By</th>
-                  <th>Status </br> <select><option>All</option><option>Open</option><option>Closed</option></select></th>
+                  <th>Status </br> <select class="status-select" data-quarter="q1"><option>All</option><option>Open</option><option>Closed</option></select></th>
                   <th>Time Posted</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class='post_row' id='p5' data-postid='5' data-postuserid='2'>
+                <tr class='post_row' data-quarter='q1' data-postid='5' data-postuserid='2' data-status='Open' data-type='For Sale'>
                   <td>1</td>
                   <td><a data-toggle="modal" href='#myModal'>Mark</a></td>
                   <td>Otto</td>
-                  <td>@mdo</td>
+                  <td>Open</td>
                   <td>@mdo</td>
                 </tr>
-                <tr>
+                <tr  class='post_row' data-quarter='q1'  data-postid='2' data-postuserid='1' data-status='Closed' data-type='Wanted'>
                   <td>2</td>
                   <td>Jacob</td>
                   <td>Thornton</td>
-                  <td>@fat</td>
+                  <td>Closed</td>
                   <td>@mdo</td>
                 </tr>
-                <tr>
+                <tr class='post_row' data-quarter='q1' data-postid='2' data-postuserid='1' data-status='Closed' data-type='Wanted'>
                   <td>3</td>
                   <td>Larry</td>
                   <td>the Bird</td>
-                  <td>@twitter</td>
+                  <td>Closed</td>
                   <td>@mdo</td>
                 </tr>
               </tbody>
@@ -119,6 +120,8 @@ $user_id = $this->session->userdata('user_id');
 </div>
 <script type="text/javascript">
  window.user_id = <?php echo $user_id; ?>;
+ window.desc = [];
+window.desc[5] = "lorem Ipsum";
 </script>
  <?php //echo $data; ?>
 

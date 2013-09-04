@@ -80,7 +80,20 @@ class Main extends CI_Controller {
 		// echo "<script type='text/javascript'>reply_sent();</script>";
 		//redirect('/main/','location',301);
 	}
+public function reply_test(){
 
+$msg = $this->input->post('msg');
+$sender= $this->input->post('user_id');
+$receiver = $this->input->post('post_user_id');
+$post_id= $this->input->post('post_id');
+$data = array('person1_id'=>$sender,
+				'person2_id' => $receiver,
+				'post_id' => $post_id );
+
+
+print_r($data);
+ 
+}
 
 	 public function reply_thread()
 	{
