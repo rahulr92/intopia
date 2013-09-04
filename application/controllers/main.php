@@ -76,10 +76,19 @@ class Main extends CI_Controller {
 
 	 	public function reply()
 	{
-		$this->Model->reply();
+		$this->M_emails->reply();
 		// echo "<script type='text/javascript'>reply_sent();</script>";
 		//redirect('/main/','location',301);
 	}
+
+
+	 public function reply_thread()
+	{
+		$this->M_emails->reply_thread();
+		// echo "<script type='text/javascript'>reply_sent();</script>";
+		//redirect('/main/','location',301);
+	}
+
 
 	 public function get_user_posts()
 	{
@@ -99,6 +108,7 @@ class Main extends CI_Controller {
 		$delete_url = base_url('index.php/main/delete');
 		$msg_url = base_url('index.php/main/reply');
 
+
 		foreach ($postings->result() as $row) {
 			$post_id = $row->post_id;
 			$post_desc = $row->desc;
@@ -117,9 +127,9 @@ class Main extends CI_Controller {
 				$data .= "<h2>Q$last_period Listings</h2>";
 				$data .= "
 				<div class='col-md-2'>Displaying</div>
-				<button class='col-md-2 btn btn-primary all_btn'>All</button>
-				<button class='col-md-2 btn btn-primary for_sale'>For Sale</button>
-				<button class='col-md-2 btn btn-primary wanted'>Wanted</button>
+				<a href='#' class='col-md-2  all_btn'>All</a>
+				<a href='#'  class='col-md-2  for_sale'>For Sale</a>
+				<a href='#'  class='col-md-2 wanted'>Wanted</a>
 				<div class='col-md-4'>
 				<span>Hide closed</span>
 				<input id = 'Checked1' type='checkbox' class='hide_closed' name='check1' />
@@ -144,20 +154,20 @@ class Main extends CI_Controller {
 		</form></div>";
 			if($user_id === $row->user_id)
 			{
+
 		$admin_options = "<div class='col-md-2'>
 		<form method='post' action='$close_url'/>
 		<input type='hidden' name='post_id' value='$post_id'/>
-		<input type='submit' value='Close' $close_btn>
+		<input type='submit' value='Close' class='btn-warning' $close_btn>
 		</form></div>
 		<div class='col-md-2'>
 		<form method='post' action='$delete_url'/>
 		<input type='hidden' name='post_id' value='$post_id'/>
-		<input type='submit' value='Delete'>
+		<input type='submit' class='btn-danger' value='Delete'>
 		</form></div>";
-
 				$data .= $admin_options;
 			}
-			$data .="<div class='row desc $post_id'><p>$post_desc</p>
+			$data .="<div class='row desc $post_id'></br><p>$post_desc</p>
 					</div>
 			</div>";
 		}
