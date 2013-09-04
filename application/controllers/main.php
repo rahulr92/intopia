@@ -21,8 +21,7 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$data = array('title' => 'Intopia','main_content' => 'main_v','data'=>$this->get_posts());
-		$this->load->view('template',$data);
+	$this->get_posts();
 	}
 
 
@@ -110,6 +109,41 @@ print_r($data);
 		return $postings;
 	}
 
+	public function get_posts(){
+		$data = array();
+		$user_id = $this->session->userdata('user_id');
+		$postings = $this->Model->get_posts();
+		$data = "";
+		$quarter = 0;
+		$desc_arr = array();
+
+		foreach ($postings->result() as $row) {
+			if($row->period !== $quarter)
+			{
+				$quarter=$row->period;
+			}
+
+			$post_id = $row->post_id;
+			$post_user_id = $row->user_id;
+			$post_username = $this->Model->get_username($post_user_id);
+
+			$data[$quarter][$post_id] = array(
+						'post_id' => $row->post_id,
+						'post_desc' => $row->desc,
+						'post_title' => $row->title,
+						'post_user_id' => $row->user_id,
+						'post_username' => $post_username,
+						'post_type_id' => $row->type_id,
+						'post_status_id' => $row->status_id,
+						'post_timestamp' => $row->timestamp
+					);
+			$desc_arr[$post_id] = $row->desc;
+		}
+		$data_all = array('title' => 'Intopia','main_content' => 'main_v','posts' => $data, 'desc_arr'=>$desc_arr);
+		$this->load->view('template',$data_all);
+	}
+
+/*
 	public function get_posts()
 	{	
 		$period = array();
@@ -187,7 +221,7 @@ print_r($data);
 
 		return $data;
 	}
-	
+*/	
 
 }
 ?>

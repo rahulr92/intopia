@@ -15,7 +15,7 @@ $msg_url = base_url('index.php/main/reply_test');
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modal-title">Modal title</h4>
+          <h4 class="modal-title">Modal title</h4>
         </div>
         <div class="modal-body">
           <p id="modal-desc">In arcu in enim ut porttitor magnis ultricies velit auctor cras tortor ac lorem proin turpis lorem odio enim natoque! Tincidunt? Enim. Mid nisi dis, porttitor. Tortor cras pid integer urna tincidunt! Augue mid magna, sagittis lorem pellentesque enim arcu, nascetur ut in dignissim, dolor ac et platea, sed ac lundium tincidunt? Enim? Ut augue placerat, in sed ultricies! Ultrices? Nisi! Diam? Sagittis! Rhoncus, dignissim tincidunt. Scelerisque ut et ut amet, porttitor ac pellentesque cum, mus rhoncus turpis? Aliquet dolor. Vut mattis, diam nunc aenean lundium, montes amet! Cum ut! Pellentesque odio amet duis in vel, pulvinar scelerisque, eu, pid nunc dis et pid aliquet pulvinar tempor quis, mattis ac mid scelerisque! Dis et ac phasellus velit aliquet! In integer</p>
@@ -52,54 +52,78 @@ $msg_url = base_url('index.php/main/reply_test');
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-<?php //print_r($posts);
-  foreach ($posts as $quarter => $posts) {
-    echo "<h2>Quarter$quarter</h2>";
-    ?>
-    <table class="table">
+
+<div class="quarter" id="q1">
+	<h2>Quarter1</h2>
+<table class="table">
               <thead>
                 <tr>
-                  <th>Offer type</br><select class="type-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
+                  <th>Offer type</br><select class="type-select" data-quarter="q1"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
                   <th>Title</th>
                   <th>Posted By</th>
-                  <th>Status </br> <select class="status-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>Open</option><option>Closed</option></select></th>
+                  <th>Status </br> <select class="status-select" data-quarter="q1"><option>All</option><option>Open</option><option>Closed</option></select></th>
                   <th>Time Posted</th>
                 </tr>
               </thead>
               <tbody>
-                <?php
-    foreach ($posts as $post) {
-      //print_r($post);
-       
-       $post_id = $post['post_id'];
-      $post_desc = $post['post_desc'];
-      $post_title = $post['post_title'];
-      $post_user_id = $post['post_user_id'];
-      $post_username = $post['post_username'];
-      $post_timestamp = $post['post_timestamp'];
-      $post_date = date('M j Y g:i A', strtotime($post_timestamp ));
-      $post_type = (($post['post_type_id'] == 1)? "For Sale": "Wanted");
-       $post_status = $post['post_status_id']?'Open':'Closed';
-      echo "<tr class='post_row' data-title='$post_title' data-quarter='q$quarter' data-postid='$post_id' data-postuserid='$post_user_id' data-status='$post_status' data-type='$post_type'>
-                  <td>$post_type</td>
-                  <td><a class='post_title' data-toggle='modal' href='#myModal'>$post_title</a></td>
-                  <td>$post_username</td>
-                  <td>$post_status</td>
-                  <td>$post_date</td>
-                </tr>";
-    }
-    echo   "</tbody></table>";
-  }
- ?>
+                <tr class='post_row' data-quarter='q1' data-postid='5' data-postuserid='2' data-status='Open' data-type='For Sale'>
+                  <td>1</td>
+                  <td><a data-toggle="modal" href='#myModal'>Mark</a></td>
+                  <td>Otto</td>
+                  <td>Open</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr  class='post_row' data-quarter='q1'  data-postid='2' data-postuserid='1' data-status='Closed' data-type='Wanted'>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>Closed</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr class='post_row' data-quarter='q1' data-postid='2' data-postuserid='1' data-status='Closed' data-type='Wanted'>
+                  <td>3</td>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>Closed</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
+
+  <p>End of Quarter1</p>
+    <hr>
+</div>
 
 
+<div class="quarter" id="q2">
+<h2>Quarter2</h2>
+<table class="table">
+              <thead>
+                <tr>
+                  <th>Offer type</th>
+                  <th>Title</th>
+                  <th>Posted By</th>
+                  <th>Status</th>
+                  <th>Time Posted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><a data-toggle="modal" href='#myModal'>Mark</a></td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
+  <hr>
+  <p>End of Quarter2</p>
+</div>
 <script type="text/javascript">
-window.desc = [];
- window.user_id = <?php echo $user_id.";";
- //print_r($desc_arr);
-  foreach ($desc_arr as $post_id => $post_desc) {
- echo "window.desc['$post_id'] = '$post_desc';";
-  }
- ?>
+ window.user_id = <?php echo $user_id; ?>;
+ window.desc = [];
+window.desc[5] = "lorem Ipsum";
 </script>
+ <?php //echo $data; ?>
 

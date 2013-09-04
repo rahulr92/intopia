@@ -67,10 +67,12 @@ $(function() {
 
 $(function() {
      $('.post_row').click(function(){
-      console.log(window.user_id);
+      //console.log(window.user_id);
       var post_id= $(this).data('postid');
       var post_user_id= $(this).data('postuserid');
       var post_desc =  desc[post_id];
+      var post_title = $(this).data('title');
+       $('#modal-title').html(post_title);
           $('#modal-desc').html(post_desc);
           $('#user_id').val(window.user_id);
           $('#post_user_id').val(post_user_id);
@@ -91,3 +93,8 @@ $(function() {
 function reply_sent(){
 	alert("Reply sent successfully!");
 }
+
+function timestamp_to_date(arg){
+ var t = arg.split(/[- :]/);
+  var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+return d;}

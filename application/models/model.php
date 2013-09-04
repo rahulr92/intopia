@@ -9,6 +9,12 @@ class Model extends CI_Model {
 		$query = $this->db->get('postings');
 		return $query;
 	}
+	public function get_username($user_id){
+		$this->db->where("user_id", $user_id); 
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+			return $query->last_row()->username;
+	}
 
 
 	public function close($post_id){
