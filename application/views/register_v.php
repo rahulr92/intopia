@@ -1,4 +1,4 @@
-<form id="register" method="post" action="<?php echo base_url('index.php/register/submit'); ?>">
+<form id="register_frm" method="post" action="<?php echo base_url('index.php/register/submit'); ?>">
     <h1>Log In</h1>
     <fieldset id="inputs">
         <input id="username" name=" username"type="text" placeholder="Username" autofocus required>   

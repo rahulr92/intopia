@@ -66,17 +66,22 @@ $(function() {
 
 
 $(function() {
-     $('.post_row').click(function(){
+     $('.post_title').click(function(){
       //console.log(window.user_id);
       var post_id= $(this).data('postid');
       var post_user_id= $(this).data('postuserid');
-      var post_desc =  desc[post_id];
-      var post_title = $(this).data('title');
+      var post_desc =  window.desc[post_id];
+      var post_title = $(this).html();
        $('#modal-title').html(post_title);
           $('#modal-desc').html(post_desc);
           $('#user_id').val(window.user_id);
           $('#post_user_id').val(post_user_id);
-           $('#post_id').val(post_id);
+           $('.post_id').val(post_id);
+           if($(this).data('status')=='Closed')
+           {
+            $('#status_btn').val('Reopen post');
+            $('#status_toggle_flag').val('1');
+           }
            if(window.user_id == post_user_id)
            {
             $('.non_owner').hide();
@@ -98,3 +103,26 @@ function timestamp_to_date(arg){
  var t = arg.split(/[- :]/);
   var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
 return d;}
+
+$(function() {
+$("#register_frm").submit(function() {
+    if ($('#password').val()!=$('#cpassword').val()) {
+         alert("Passwords dont match!"); 
+          $('#password').val("");
+          $('#cpassword').val("");
+          return false;
+         
+        }
+    });
+});
+
+
+$(function() {
+$("#delete_post_frm").submit(function() {
+    if (!confirm("Are you sure you want to delete this post?")) {
+          return false;
+    }
+});
+    });
+
+

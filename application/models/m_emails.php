@@ -66,15 +66,15 @@ public function get_latest_mail($thread_id){
 
 		$this->db->where("thread_id",$thread_id);
 		$this->db->where("timestamp",$max_time);
-		$this->db->select('msg');
+		//$this->db->select('msg');
 			$query = $this->db->get('emails');
-			return $query->last_row()->msg;
+			return $query->last_row();
 		}
 
 
 public function get_mails_by_thread($thread_id){
 		$this->db->where("thread_id", $thread_id); 
-		$this->db->select('msg');
+		//$this->db->select('msg');
 
 		$query = $this->db->get('emails');
 			return $query->result();
@@ -87,6 +87,7 @@ $msg = $this->input->post('msg');
 $sender= $this->input->post('user_id');
 $receiver = $this->input->post('post_user_id');
 $post_id= $this->input->post('post_id');
+$anony_flag= ($this->input->post('anony_flag'))?1:0;
 
 $data = array('person1_id'=>$sender,
 				'person2_id' => $receiver,
@@ -109,10 +110,10 @@ $data2 = array('sender_id'=>$sender,
 				'receiver_id' => $receiver,
 				'post_id' => $post_id,
 				'thread_id' => $thread_id,
-				'msg' => $msg );
+				'msg' => $msg,
+				'anony_flag' => $anony_flag );
 
 $this->db->insert('emails',$data2);
- echo "Reply sent!";
  
 }
 
@@ -123,15 +124,20 @@ public function reply_thread(){
 $msg = $this->input->post('msg');
 $thread_id= $this->input->post('thread_id');
 $post_id= $this->input->post('post_id');
+$sender= $this->input->post('sender_id');
+$receiver = $this->input->post('receiver_id');
+$anony_flag= ($this->input->post('anony_flag'))?1:0;
 
-
-
-$data = array(	'post_id' => $post_id,
+$data = array(	'sender_id'=>$sender,
+				'receiver_id' => $receiver,
+				'post_id' => $post_id,
 				'thread_id' => $thread_id,
-				'msg' => $msg );
+				'msg' => $msg,
+				'anony_flag' => $anony_flag );
 
 $this->db->insert('emails',$data);
- echo "Reply sent!";
+
+ //echo "Reply sent!";
  
 }
 }

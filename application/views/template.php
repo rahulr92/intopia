@@ -41,7 +41,6 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href"<?php echo base_url('index.php/main'); ?>">Home</a></li>
                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/posting')."'>New Post</a>"; } ?></li>
                      <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/emails/list_mails')."'>Messages</a>"; } ?></li>
                          <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/logout')."'>Logout</a>"; } ?></li>
@@ -51,7 +50,9 @@
         </div>
 
             <div id="container" class="container">
-                    <?php $this->load->view($main_content); ?>
+                    <?php 
+                       
+                        $this->load->view($main_content); ?>
                  <footer>
                     <?php $this->load->view('includes/footer'); ?>
                 </footer>

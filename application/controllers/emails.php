@@ -24,7 +24,7 @@ class Emails extends CI_Controller {
 			
 		}
 
-			$data = array('title' => 'Intopia','main_content' => 'mails_v','data'=>$reply_list);
+			$data = array('title' => 'Intopia','main_content' => 'mail_list_v','data'=>$reply_list);
 			$this->load->view('template',$data);
 	}
 
@@ -33,35 +33,24 @@ class Emails extends CI_Controller {
 		$thread_url = base_url('index.php/emails/thread_view/'); 
 		$reply_list = "Replies";
 		foreach ($threads as $thread ) {
-			$snippet = $this->M_emails->get_latest_mail($thread->thread_id);
+			$mail = $this->M_emails->get_latest_mail($thread->thread_id);
+			$snippet = $mail->msg;
+			$user = $this->Model->get_username($mail->sender_id);
+			//print_r($mail);
 			//print_r($snippet);
 			//echo $thread->thread_id;
-			$reply_list .= "<h3><a href='$thread_url/$thread->thread_id/$post_id'>$snippet</a></h3>";
+			$reply_list .= "<h3><a href='$thread_url/$thread->thread_id/$post_id'>$user: $snippet</a></h3>";
 			
 		}
 
-			$data = array('title' => 'Intopia','main_content' => 'mails_v','data'=>$reply_list);
+			$data = array('title' => 'Intopia','main_content' => 'mail_list_v','data'=>$reply_list);
 			 $this->load->view('template',$data);
 	}
 
 		public function thread_view($thread_id,$post_id){
 		$threads = $this->M_emails->get_mails_by_thread($thread_id);
-		$reply_list = "<h1>Conversation</h1>";
-		foreach ($threads as $thread ) {
-
-			$reply_list .= "<p>$thread->msg</p><hr>";
-			//print_r($thread);
-			//echo $thread->msg;
-		}
-		$msg_url = base_url('index.php/main/reply_thread');
-		$sender= $this->session->userdata('user_id');
-		$receiver_id=0;
-		$reply_list .= "</br><form  method='post' action='$msg_url'/>
-		<input type='hidden' name='post_id' value='$post_id'/>
-		<input type='hidden' name='thread_id' value='$thread_id'/> 
-		<textarea name='msg' class='row' rows='2' cols='100'>message</textarea></br><input type='submit' value='Reply'/></form>";
-
-			$data = array('title' => 'Intopia','main_content' => 'mails_v','data'=>$reply_list);
+		$users=$this->Model->get_thread_users($thread_id);
+			$data = array('title' => 'Intopia Listing','main_content' => 'mails_v','threads'=>$threads, 'thread_id' => $thread_id, 'post_id' => $post_id, 'users'=>$users);
 			 $this->load->view('template',$data);
 	}
 

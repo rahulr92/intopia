@@ -24,7 +24,7 @@ class Register extends CI_Controller {
 		}
 		else
 			echo "Username already exists!";
-		$data = array('title' => 'Intopia','main_content' => 'home_v');
+		$data = array('title' => 'Intopia Listing','main_content' => 'home_v');
 		$this->load->view('template',$data);
 	}
 }

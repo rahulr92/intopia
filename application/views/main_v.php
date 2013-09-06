@@ -1,14 +1,13 @@
 <?php
 $user_id = $this->session->userdata('user_id');
 //echo "<h1>Welcome $uname!</h1>";
-$msg_url = base_url('index.php/main/reply_test');
-    $close_url = base_url('index.php/main/close');
+$msg_url = base_url('index.php/main/reply');
+   $edit_url = base_url('index.php/main/edit');
+    $close_url = base_url('index.php/main/change_status');
     $delete_url = base_url('index.php/main/delete');
 ?>
 
-  <!-- Button trigger modal -->
-  <a data-toggle="modal" href="#myModal" >Launch demo modal</a>
-
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -23,25 +22,30 @@ $msg_url = base_url('index.php/main/reply_test');
         <div class="non_owner">
         <h3>Reply</h3>
         <form class='' method='post' action='<?php echo $msg_url; ?>'/>
-		<input type='hidden' name='post_id' id='post_id' value=''/>
+		<input type='hidden' name='post_id' class='post_id' value=''/>
 		<input type='hidden' name='post_user_id' id='post_user_id' value=''/> 
 		<input type='hidden' name='user_id' id='user_id'  value=''/>
 		<textarea name='msg' class='' rows='2' cols='60'>Message</textarea></br>
 		<span>Make anonymous</span>
-		<input id = 'Checked1' type='checkbox' class='hide_closed' name='check1' /></br>
+		<input id = 'Checked1' type='checkbox' class='hide_closed' value='1' name='anony_flag' /></br>
 		<input type='submit' class='btn btn-success' value='Send' $close_btn>
 		</form>
 	</div>
 	 <div class="owner">
         <h3>Options</h3>
-        <form class='owner_btn' method='post' action='$msg_url'/>
-		<input type='submit' class='btn btn-success' value='Edit' $close_btn>
+        <form class='owner_btn' method='post' action='<?php echo $edit_url; ?>'/>
+              <input type='hidden' name='post_id' class='post_id' value=''/>
+
+		<input type='submit' class='btn btn-success' value='Edit'>
 		</form>
-		 <form class='owner_btn' method='post' action='$msg_url'/>
-		<input type='submit' class='btn btn-warning' value='Mark as closed' $close_btn>
+		 <form class='owner_btn' id='status_frm' method='post' action='<?php echo $close_url; ?>'/>
+      <input type='hidden' name='post_id' class='post_id' value=''/>
+        <input type='hidden' name='status' id='status_toggle_flag'  value='0'/>
+		<input type='submit' id='status_btn' class='btn btn-warning' value='Mark as closed'>
 		</form>
-		 <form class='owner_btn' method='post' action='$msg_url'/>
-		<input type='submit' class='btn btn-danger' value='Delete' $close_btn>
+		 <form class='owner_btn' id='delete_post_frm' method='post' action='<?php echo $delete_url; ?>'/>
+    <input type='hidden' name='post_id' class='post_id' value=''/>
+		<input type='submit' class='btn btn-danger' value='Delete'>
 		</form>
 	</div>
 
@@ -52,11 +56,13 @@ $msg_url = base_url('index.php/main/reply_test');
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+
+
 <?php //print_r($posts);
   foreach ($posts as $quarter => $posts) {
     echo "<h2>Quarter$quarter</h2>";
     ?>
-    <table class="table">
+    <table class="table table-hover">
               <thead>
                 <tr>
                   <th>Offer type</br><select class="type-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
@@ -77,12 +83,12 @@ $msg_url = base_url('index.php/main/reply_test');
       $post_user_id = $post['post_user_id'];
       $post_username = $post['post_username'];
       $post_timestamp = $post['post_timestamp'];
-      $post_date = date('M j Y g:i A', strtotime($post_timestamp ));
+      $post_date = date('D, M j Y g:i A', strtotime($post_timestamp ));
       $post_type = (($post['post_type_id'] == 1)? "For Sale": "Wanted");
        $post_status = $post['post_status_id']?'Open':'Closed';
-      echo "<tr class='post_row' data-title='$post_title' data-quarter='q$quarter' data-postid='$post_id' data-postuserid='$post_user_id' data-status='$post_status' data-type='$post_type'>
+      echo "<tr class='post_row' data-title='$post_title' data-quarter='q$quarter'  data-status='$post_status' data-type='$post_type'>
                   <td>$post_type</td>
-                  <td><a class='post_title' data-toggle='modal' href='#myModal'>$post_title</a></td>
+                  <td><a class='post_title' data-postid='$post_id' data-postuserid='$post_user_id' data-status='$post_status' data-toggle='modal' href='#myModal'>$post_title</a></td>
                   <td>$post_username</td>
                   <td>$post_status</td>
                   <td>$post_date</td>

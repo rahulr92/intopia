@@ -542,3 +542,7 @@ FileETag None
 # <IfModule mod_headers.c>
 #    Header set Connection Keep-Alive
 # </IfModule>
+
+#RewriteEngine On
+#RewriteCond $1 !^(index\.php|images|scripts|css|robots\.txt)
+#RewriteRule ^(.*)$ /index.php/$1 [L]

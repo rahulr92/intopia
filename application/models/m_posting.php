@@ -8,12 +8,25 @@ class M_posting extends CI_Model {
 
 	 if($this->db->insert('postings', $data))
 	 {
-	 	echo "Posted successfully!";
+	 	$msg = array('msg' => "Posted successfully!");
+		
 	 } 
 	 else
 	 {
-	 	echo "Posting failed!";
+	 	$msg = array('msg' => "Posting failed!");
 	 } 
+	 $this->load->view('alert_v',$msg);
+	}
+
+public function update_posting($post_id,$data){
+
+// echo $post_id;
+//print_r($data);
+$this->db->where('post_id',$post_id);
+	 $this->db->update('postings', $data);
+	 	$msg = array('msg' => "Post updated successfully!");
+	 $this->load->view('alert_v',$msg);
+
 
 	}
 }
