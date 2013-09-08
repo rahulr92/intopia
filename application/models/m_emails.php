@@ -4,6 +4,13 @@ class M_emails extends CI_Model {
 	parent::__construct(); 
 	}
 
+	public function get_username($user_id){
+		$this->db->where("user_id", $user_id); 
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+			return $query->last_row()->username;
+	}
+
 	public function get_emails(){
 		$user_id = $this->session->userdata('user_id');
 		$this->db->where('receiver_id',$user_id);
@@ -20,25 +27,42 @@ class M_emails extends CI_Model {
 		return $query->result();
 	}
 
-		public function get_mails_by_user(){
+		public function get_mails_by_sender(){
 		$user_id = $this->session->userdata('user_id');
 		$this->db->where("person1_id", $user_id); 
-		$this->db->or_where("person2_id", $user_id); 
 		$query = $this->db->get('threads');
+		if($query->num_rows() > 0){
 		foreach($query->result() as $row){
 		$this->db->or_where("post_id", $row->post_id); 
 		} 
 		$this->db->order_by("period", "desc"); 
 		$query = $this->db->get('postings');
 		return $query->result();
-
 	}
-
+	return 0;
+	}
+		public function get_mails_by_receiver(){
+		$user_id = $this->session->userdata('user_id');
+		$this->db->where("person2_id", $user_id); 
+		$query = $this->db->get('threads');
+		if($query->num_rows() > 0){
+		foreach($query->result() as $row){
+		$this->db->or_where("post_id", $row->post_id); 
+		} 
+		$this->db->order_by("period", "desc"); 
+		$query = $this->db->get('postings');
+		return $query->result();
+	}
+	return 0;
+	}
 	public function get_thread_by_sender_post($sender_id,$post_id){
 		$this->db->where("person1_id", $sender_id); 
 		$this->db->where("post_id", $post_id); 
 		$query = $this->db->get('threads');
-		return $query->last_row()->thread_id;
+		if($query->num_rows()>0)
+			return $query->last_row()->thread_id;
+		else
+			return 0;
 
 	}
 
@@ -57,6 +81,27 @@ public function get_threads_by_post($post_id){
 		return $query->result();
 	}
 
+	public function is_anony($thread_id,$sender_id){
+		$this->db->where("thread_id", $thread_id); 
+		$this->db->where("sender_id", $sender_id); 
+		$this->db->where('anony_flag',0);
+		$query = $this->db->get('emails');
+		if($query->num_rows > 0)
+			return 0;
+		return 1;
+	}
+
+		public function is_posted_anony($post_id){
+		$this->db->where("post_id", $post_id); 
+		$query = $this->db->get('postings');
+		return $query->last_row()->anony_flag;			
+	}
+
+public function get_thread_len($thread_id){
+		$this->db->where("thread_id", $thread_id); 
+		$this->db->from('emails');
+		return $this->db->count_all_results();
+		}
 
 public function get_latest_mail($thread_id){
 		$this->db->where("thread_id", $thread_id); 
@@ -71,7 +116,6 @@ public function get_latest_mail($thread_id){
 			return $query->last_row();
 		}
 
-
 public function get_mails_by_thread($thread_id){
 		$this->db->where("thread_id", $thread_id); 
 		//$this->db->select('msg');
@@ -80,6 +124,29 @@ public function get_mails_by_thread($thread_id){
 			return $query->result();
 		}
 
+	public function get_thread_users($thread_id){
+		$this->db->where("thread_id", $thread_id); 
+		$query = $this->db->get('threads');
+		$users = array();
+		if($query->num_rows() > 0)
+			{
+				$p1 = $query->last_row()->person1_id;
+				$p2 = $query->last_row()->person2_id;
+				
+				$users[$p1] = ($this->is_anony($thread_id,$p1)==1)?"Anony. team":$this->get_username($p1);
+				if($this->is_posted_anony($query->last_row()->post_id))
+				{
+					$users[$p2] = ($this->is_anony($thread_id,$p2)==1)?"Anony. team":$this->get_username($p2);
+				}
+				else
+				{
+					$users[$p2] = $this->get_username($p2);
+				}
+				
+			}
+			return $users;
+
+		}
 
 public function reply(){
 

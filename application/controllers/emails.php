@@ -7,50 +7,43 @@ class Emails extends CI_Controller {
 	}
 
 	public function list_mails(){
-		$posts = $this->M_emails->get_mails_by_user();
+		$s_posts = $this->M_emails->get_mails_by_sender();
+		$r_posts = $this->M_emails->get_mails_by_receiver();
 		$thread_list_url = base_url('index.php/emails/list_threads/'); 
 		$thread_detail_url = base_url('index.php/emails/thread_view/'); 
 		$user_id = $this->session->userdata('user_id');
-		$reply_list = "Replies to";
-		foreach ($posts as $post ) {
-			$title = $post->title;
-			$post_id = $post->post_id;
-			if($user_id === $post->user_id){
-							$reply_list .= "<h3><a href='$thread_list_url/$post_id'>$title</a></h3>";
-			} else {
-				$thread_id = $this->M_emails->get_thread_by_sender_post($user_id, $post_id);
-				$reply_list .= "<h3><a href='$thread_detail_url/$thread_id/$post_id'>$title</a></h3>";
-			}
-			
-		}
-
-			$data = array('title' => 'Intopia','main_content' => 'mail_list_v','data'=>$reply_list);
-			$this->load->view('template',$data);
+			$data = array('title' => 'Intopia Listing','main_content' => 'mail_list_v','s_posts'=>$s_posts,'r_posts'=>$r_posts);
+			$this->load->view('template',$data);;
 	}
 
 	public function list_threads($post_id){
+		$post_title = $this->Model->get_post_title($post_id);
 		$threads = $this->M_emails->get_threads_by_post($post_id);
 		$thread_url = base_url('index.php/emails/thread_view/'); 
-		$reply_list = "Replies";
+		$hreads_arr = array();
 		foreach ($threads as $thread ) {
-			$mail = $this->M_emails->get_latest_mail($thread->thread_id);
-			$snippet = $mail->msg;
+			$thread_id=$thread->thread_id;
+			$mail = $this->M_emails->get_latest_mail($thread_id);
 			$user = $this->Model->get_username($mail->sender_id);
-			//print_r($mail);
-			//print_r($snippet);
-			//echo $thread->thread_id;
-			$reply_list .= "<h3><a href='$thread_url/$thread->thread_id/$post_id'>$user: $snippet</a></h3>";
+			$thread_len = $this->M_emails->get_thread_len($thread_id);
+			$threads_arr[$thread_id] = array(
+					'last_msg' => $mail,
+					'sender' => $user,
+					'thread_len'  => $thread_len
+				);
 			
 		}
 
-			$data = array('title' => 'Intopia','main_content' => 'mail_list_v','data'=>$reply_list);
+			$data = array('title' => 'Intopia Listing','main_content' => 'thread_list_v','data'=>$threads_arr, 'post_title'=>$post_title, 'post_id' =>$post_id);
 			 $this->load->view('template',$data);
 	}
 
-		public function thread_view($thread_id,$post_id){
+		public function thread_view($post_id,$thread_id){
 		$threads = $this->M_emails->get_mails_by_thread($thread_id);
-		$users=$this->Model->get_thread_users($thread_id);
-			$data = array('title' => 'Intopia Listing','main_content' => 'mails_v','threads'=>$threads, 'thread_id' => $thread_id, 'post_id' => $post_id, 'users'=>$users);
+		$users=$this->M_emails->get_thread_users($thread_id);
+				$post = $this->Model->get_post($post_id);
+			$data = array('title' => 'Intopia Listing','main_content' => 'mails_v','threads'=>$threads, 
+						'thread_id' => $thread_id, 'post' => $post, 'users'=>$users);
 			 $this->load->view('template',$data);
 	}
 

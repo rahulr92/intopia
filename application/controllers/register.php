@@ -16,7 +16,9 @@ class Register extends CI_Controller {
 		$uname= $this->input->post('username');
 		$pswd= $this->input->post('password');
 		$reg_details = array('username' => $uname,
-								'password' => $pswd);
+								'password' => $pswd,
+								'teamno' =>$this->input->post('teamno'),
+								'teamname' => $this->input->post('teamname'));
 		$flag = $this->M_register->register($reg_details);
 		if($flag)
 		{
@@ -24,7 +26,7 @@ class Register extends CI_Controller {
 		}
 		else
 			echo "Username already exists!";
-		$data = array('title' => 'Intopia Listing','main_content' => 'home_v');
+		$data = array('title' => 'Intopia Listing','main_content' => 'home_v','team_count'=>$this->Model->get_team_count());
 		$this->load->view('template',$data);
 	}
 }

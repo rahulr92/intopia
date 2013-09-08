@@ -2,7 +2,7 @@
     <h1>Create New Post</h1>
     <fieldset id="inputs">
         <input id="title" type="text" name="title" placeholder="Title" autofocus required></br>   
-        <textarea name="desc" rows="10" cols="50">Description</textarea></br>  
+        <textarea name="desc" rows="10" placeholder="Description" cols="50"></textarea></br>  
         <select name="type">
  		 	<option value="1">For Sale</option> 
   			<option value="2">Wanted</option>
@@ -13,8 +13,21 @@
 	      	           echo "<option value='$i'>Q$i</option>"; 
 	        	?>
 		</select></br>
-        <span>Post anonymously</span>
-        <input id = 'Checked1' type='checkbox' value='1' class='hide_closed' name='anony_flag' />
+        <label >
+            <div class='checkbox'><label>
+                        <input type='checkbox' class='checkbox' id='inlineCheckbox' name='check_all' value='1'>
+                        All</label></div>
+            <?php 
+                 foreach($teams as $team){
+                        echo "<div class='checkbox'><label>
+                        <input type='checkbox' class='checkbox' id='inlineCheckbox' name='check_team$team->user_id' value='$team->user_id'>
+                        $team->teamname </label></div>"; 
+                    }
+                ?>
+        
+        </label></br>
+        
+        <input id = 'Checked1' type='checkbox' value='1' class='hide_closed' name='anony_flag' /><span>Post anonymously</span>
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="Create Post">

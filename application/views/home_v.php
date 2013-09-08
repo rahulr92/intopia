@@ -6,6 +6,7 @@
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="Log in"></br>
-        <a href="">Forgot your password?</a></br><a href="<?php echo base_url('index.php/register'); ?>">Register</a>
+        <?php
+        if($team_count < 12) { echo "<a href=".base_url('index.php/register').">Register</a>"; }?>
     </fieldset>
 </form>

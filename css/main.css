@@ -5,9 +5,6 @@
    ========================================================================== */
 
 
-#container{
-	padding: 20px;
-}
 
 .owner_btn{
 	display: inline-block;
@@ -40,6 +37,16 @@ table { table-layout: fixed; }
 }
 
 
+.post_title_th{
+	width: 40%;
+}
 
+.post_status_th{
+	width: 10%;
+}
+
+.post_type_th{
+	width: 10%;
+}
 
 

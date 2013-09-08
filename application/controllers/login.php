@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$data = array('title' => 'Intopia Listing','main_content' => 'home_v');
+		$data = array('title' => 'Intopia Listing','main_content' => 'home_v','team_count'=>$this->Model->get_team_count());
 		$this->load->view('template',$data);
 	}
 

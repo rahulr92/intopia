@@ -25,7 +25,7 @@ $msg_url = base_url('index.php/main/reply');
 		<input type='hidden' name='post_id' class='post_id' value=''/>
 		<input type='hidden' name='post_user_id' id='post_user_id' value=''/> 
 		<input type='hidden' name='user_id' id='user_id'  value=''/>
-		<textarea name='msg' class='' rows='2' cols='60'>Message</textarea></br>
+		<textarea name='msg' class='' rows='2' cols='60' placeholder="Message"></textarea></br>
 		<span>Make anonymous</span>
 		<input id = 'Checked1' type='checkbox' class='hide_closed' value='1' name='anony_flag' /></br>
 		<input type='submit' class='btn btn-success' value='Send' $close_btn>
@@ -59,16 +59,17 @@ $msg_url = base_url('index.php/main/reply');
 
 
 <?php //print_r($posts);
-  foreach ($posts as $quarter => $posts) {
+if(is_array($all_posts)){
+  foreach ($all_posts as $quarter => $posts) {
     echo "<h2>Quarter$quarter</h2>";
     ?>
     <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Offer type</br><select class="type-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
-                  <th>Title</th>
+                  <th class='post_type_th'>Offer type</br><select class="type-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>For Sale</option><option>Wanted</option></select></th>
+                  <th  class='post_title_th'>Title</th>
                   <th>Posted By</th>
-                  <th>Status </br> <select class="status-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>Open</option><option>Closed</option></select></th>
+                  <th class='post_status_th'>Status </br> <select class="status-select" data-quarter="q<?php echo $quarter; ?>"><option>All</option><option>Open</option><option>Closed</option></select></th>
                   <th>Time Posted</th>
                 </tr>
               </thead>
@@ -96,6 +97,7 @@ $msg_url = base_url('index.php/main/reply');
     }
     echo   "</tbody></table>";
   }
+}
  ?>
 
 
