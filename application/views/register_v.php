@@ -1,7 +1,7 @@
 <form id="register_frm" method="post" action="<?php echo base_url('index.php/register/submit'); ?>">
     <h1>Register</h1>
     <fieldset id="inputs">
-        <input id="username" name=" username"type="text" placeholder="Username" autofocus required>   
+        <input id="username" name=" username" type="email" placeholder="Username" autofocus required>   
         <input id="password" name="password" type="password" placeholder="Password" required>
          <input id="cpassword" type="password" placeholder="Confirm Password" required>
            </br>  

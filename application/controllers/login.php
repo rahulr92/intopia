@@ -26,5 +26,41 @@ class Login extends CI_Controller {
 
 	}
 
+
+	public function show_thread($user_id,$post_id,$thread_id)
+	{
+		$thread_details = array('user_id' => $user_id,
+						'post_id' => $post_id,'thread_id' => $thread_id);
+		$data = array('title' => 'Intopia Listing','main_content' => 'home_v',
+				'thread_details' => $thread_details, 
+				'team_count'=>$this->Model->get_team_count());
+		$this->load->view('template',$data);
+
+	}
+
+
+	public function thread_login()
+	{
+		$uname= $this->input->post('username');
+		$pswd= $this->input->post('password');
+		$thread_id= $this->input->post('thread_id');
+		$post_id= $this->input->post('post_id');
+		$user_id= $this->input->post('user_id');
+if($uname === $this->Model->get_username($user_id))
+{
+		$flag = $this->M_login->login($uname, $pswd);
+		if($flag) {
+			redirect("/emails/thread_view/$post_id/$thread_id",'location',301);
+		// $data = array('title' => 'Intopia','main_content' => 'main_v');
+		// $this->load->view('template',$data);
+		}
+}
+		else
+			{
+			redirect("/login/show_thread/$user_id/$post_id/$thread_id",'location',301);
+			}
+
+	}
+
 }
 ?>

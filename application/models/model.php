@@ -37,6 +37,13 @@ class Model extends CI_Model {
 			return $query->last_row()->username;
 	}
 
+		public function get_userid($username){
+		$this->db->where("username", $username); 
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+			return $query->last_row()->user_id;
+	}
+
 		public function get_teamname($user_id){
 		$this->db->where("user_id", $user_id); 
 		$query = $this->db->get('users');

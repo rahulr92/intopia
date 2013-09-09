@@ -11,6 +11,15 @@ class M_emails extends CI_Model {
 			return $query->last_row()->username;
 	}
 
+	public function get_teamname($user_id){
+		$this->db->where("user_id", $user_id); 
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+			return $query->last_row()->teamname;
+	}
+
+
+
 	public function get_emails(){
 		$user_id = $this->session->userdata('user_id');
 		$this->db->where('receiver_id',$user_id);
@@ -185,7 +194,6 @@ else
 $thread_id = $this->db->insert_id();	
 }
 
-
 $data2 = array('sender_id'=>$sender,
 				'receiver_id' => $receiver,
 				'post_id' => $post_id,
@@ -193,11 +201,36 @@ $data2 = array('sender_id'=>$sender,
 				'msg' => $msg,
 				'anony_flag' => $anony_flag );
 
-$this->db->insert('emails',$data2);
+
+$this->send_reply($data2);
+
  
 }
 
 
+public function send_reply($data){
+
+$user_id = $data['receiver_id'];
+$post_id = $data['post_id'];
+$thread_id = $data['thread_id'];
+$this->send_mail($user_id,$post_id,$thread_id);
+$this->db->insert('emails',$data);
+}
+
+public function send_mail($user_id,$post_id,$thread_id){
+$email_id = $this->get_username('user_id');
+$url = base_url("login/show_thread/$user_id/$post_id/$thread_id");
+$msg = "You have a new message at Intopia Listing. 
+	Click here to view it: <a href=$msg>$msg</a>";
+$this->load->library('email');
+$this->email->from('admin@intopia.com', 'admin');
+$this->email->to($email_id); 
+$this->email->subject('New Message - Intopia Listing');
+$this->email->message($msg);	
+
+$this->email->send();
+
+}
 
 public function reply_thread(){
 
@@ -215,7 +248,7 @@ $data = array(	'sender_id'=>$sender,
 				'msg' => $msg,
 				'anony_flag' => $anony_flag );
 
-$this->db->insert('emails',$data);
+$this->send_reply($data);
 
  //echo "Reply sent!";
  

@@ -130,6 +130,9 @@ class Main extends CI_Controller {
 
 	public function reply_thread()
 	{
+
+		$sender= $this->input->post('user_id');
+		$sender_email = $this->M_emails->get_username($sender);
 		$this->M_emails->reply_thread();
 		$thread_id= $this->input->post('thread_id');
 		$post_id= $this->input->post('post_id');
