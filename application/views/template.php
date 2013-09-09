@@ -49,7 +49,7 @@
 
               <ul class="nav pull-right">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                   Welcome <?php if($this->session->userdata('user_id')) {echo $this->session->userdata('teamname');} ?>
+                    <?php if($this->session->userdata('user_id')) {echo "Welcome ".$this->session->userdata('teamname');} ?>
                   </a>
           </ul>
             </div><!--/.navbar-collapse -->
