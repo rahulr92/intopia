@@ -1,6 +1,6 @@
 
 <?php 
-if(is_array($thread_details)){
+if(isset($thread_details)){
 	$user_id= $thread_details['user_id'];
 	$post_id= $thread_details['post_id'];
 	$thread_id= $thread_details['thread_id'];
@@ -14,6 +14,7 @@ if(is_array($thread_details)){
 	else
 	{
 		echo     "<h1>Log In</h1>";
+	echo "<form id='login'  role='form' method='post' action='";
 	echo base_url('index.php/login/test')."'>";
 }
 

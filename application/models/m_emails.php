@@ -221,7 +221,7 @@ public function send_mail($user_id,$post_id,$thread_id){
 $email_id = $this->get_username('user_id');
 $url = base_url("login/show_thread/$user_id/$post_id/$thread_id");
 $msg = "You have a new message at Intopia Listing. 
-	Click here to view it: <a href=$msg>$msg</a>";
+	Click here to view it: <a href=$url>$url</a>";
 $this->load->library('email');
 $this->email->from('admin@intopia.com', 'admin');
 $this->email->to($email_id); 
@@ -253,6 +253,26 @@ $this->send_reply($data);
  //echo "Reply sent!";
  
 }
+
+public function mark_as_read($thread_id){
+$data = array(
+               'status' => 1,
+            );
+
+$this->db->where('thread_id', $thread_id);
+$this->db->update('emails', $data); 
 }
 
+
+public function get_post_rstatus($post_id){
+
+$this->db->where('post_id', $post_id);
+$this->db->where('status', 0);
+$query = $this->db->get('emails');
+if($query->num_rows() > 0) return 0; //there are unread messages for that post
+return 1; 
+}
+
+
+}
 ?>

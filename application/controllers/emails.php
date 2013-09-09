@@ -42,6 +42,7 @@ class Emails extends CI_Controller {
 		$threads = $this->M_emails->get_mails_by_thread($thread_id);
 		$users=$this->M_emails->get_thread_users($thread_id);
 				$post = $this->Model->get_post($post_id);
+		$this->M_emails->mark_as_read($thread_id);
 			$data = array('title' => 'Intopia Listing','main_content' => 'mails_v','threads'=>$threads, 
 						'thread_id' => $thread_id, 'post' => $post, 'users'=>$users);
 			 $this->load->view('template',$data);
