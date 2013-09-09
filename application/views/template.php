@@ -44,7 +44,14 @@
                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/posting')."'>New Post</a>"; } ?></li>
                      <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/emails/list_mails')."'>Messages</a>"; } ?></li>
                          <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/logout')."'>Logout</a>"; } ?></li>
+             
               </ul>
+
+              <ul class="nav pull-right">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                   Welcome <?php if($this->session->userdata('user_id')) {echo $this->session->userdata('teamname');} ?>
+                  </a>
+          </ul>
             </div><!--/.navbar-collapse -->
           </div>
         </div>

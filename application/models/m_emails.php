@@ -97,6 +97,18 @@ public function get_threads_by_post($post_id){
 		return $query->last_row()->anony_flag;			
 	}
 
+		public function is_post_visible($post_id, $user_id){
+		$this->db->select('full_visibility');
+		$this->db->where("post_id", $post_id); 
+		$query = $this->db->get('postings');
+		if($query->last_row()->full_visibility)
+			return 1;
+		$this->db->where("post_id", $post_id); 
+		$this->db->where("user_id", $user_id); 
+		$query = $this->db->get('post_visibility');
+		return $query->num_rows();
+	}
+
 public function get_thread_len($thread_id){
 		$this->db->where("thread_id", $thread_id); 
 		$this->db->from('emails');
@@ -132,15 +144,16 @@ public function get_mails_by_thread($thread_id){
 			{
 				$p1 = $query->last_row()->person1_id;
 				$p2 = $query->last_row()->person2_id;
+				$post_id = $query->last_row()->post_id;
 				
-				$users[$p1] = ($this->is_anony($thread_id,$p1)==1)?"Anony. team":$this->get_username($p1);
-				if($this->is_posted_anony($query->last_row()->post_id))
+				$users[$p1] = ($this->is_anony($thread_id,$p1)==1)?"Anonymous":$this->get_teamname($p1);
+				if($this->is_posted_anony($post_id) || !$this->is_post_visible($post_id,$p2))
 				{
-					$users[$p2] = ($this->is_anony($thread_id,$p2)==1)?"Anony. team":$this->get_username($p2);
+					$users[$p2] = ($this->is_anony($thread_id,$p2)==1)?"Anonymous":$this->get_teamname($p2);
 				}
 				else
 				{
-					$users[$p2] = $this->get_username($p2);
+					$users[$p2] = $this->get_teamname($p2);
 				}
 				
 			}

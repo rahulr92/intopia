@@ -49,4 +49,6 @@ table { table-layout: fixed; }
 	width: 10%;
 }
 
-
+#posting_frm {
+	width: 80%;
+}

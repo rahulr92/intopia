@@ -31,7 +31,7 @@ $sender_id= 0;
   </div> 
   <?php
   		//option to reply anonymously should be available only till user first reveals
-		if($users[$user_id] === "Anony. team"){
+		if($users[$user_id] === "Anonymous"){
 			echo "<div class='checkbox'><label><input name='anony_flag' type='checkbox' checked='yes'>Make anonymous</label></div>";
 		}
     ?>

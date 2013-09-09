@@ -46,9 +46,25 @@ class Main extends CI_Controller {
 		$period = $this->input->post('period');
 		$anony_flag = ($this->input->post('anony_flag') == 1)?1:0;
 		$user_id = $this->session->userdata('user_id');
+		$full_visibility = ($this->input->post('full_visibility') == 1)?1:0;
+		//print_r($this->input->post());
+
+
 		$data = array('title' => $title,'desc' => $desc, 'type_id' => $type, 'period' => $period, 
-			'status_id'=>'1','user_id'=>$user_id,'anony_flag' => $anony_flag);
-		$this->M_posting->posting($data);
+			'status_id'=>'1','user_id'=>$user_id,'anony_flag' => $anony_flag, 'full_visibility' =>$full_visibility);
+		$post_id = $this->M_posting->posting($data);
+
+				if(!$anony_flag){
+				if(!$full_visibility){
+				for($i=1;$i<=12;$i++){
+						if($this->input->post("check_team$i"))
+							{
+								$this->Model->insert_post_visibility($post_id,$this->input->post("check_team$i"));
+							}
+				}	
+			}
+		}
+
 		$this->index();
 	}
 
@@ -110,21 +126,11 @@ class Main extends CI_Controller {
 		$msg = array('msg' => "Reply sent successfully!");
 		$this->load->view('alert_v',$msg);
 		$this->get_posts(); 
-		// echo "<script type='text/javascript'>reply_sent();</script>";
-		//redirect('/main/','location',301);
-	}
-	public function reply_test(){
-
-		$msg = array('msg' => "Reply sent successfully!");
-		$this->load->view('alert_v',$msg);
-		$this->get_posts(); 
 	}
 
 	public function reply_thread()
 	{
 		$this->M_emails->reply_thread();
-		//$msg = array('msg' => "Reply sent successfully!");
-		//$this->load->view('alert_v',$msg);
 		$thread_id= $this->input->post('thread_id');
 		$post_id= $this->input->post('post_id');
 		redirect("/emails/thread_view/$post_id/$thread_id",'location',301);
@@ -138,6 +144,7 @@ class Main extends CI_Controller {
 		$postings = $this->Model->get_posts_by_user($user_id);
 		return $postings;
 	}
+
 
 	public function get_posts(){
 		$data = array();
@@ -155,10 +162,16 @@ class Main extends CI_Controller {
 
 			$post_id = $row->post_id;
 			$post_user_id = $row->user_id;
-			if($row->anony_flag)
-				$post_username = "Anonymous";
-			else
-				$post_username = $this->Model->get_username($post_user_id);
+			$post_username = "Anonymous";
+			if(!$row->anony_flag)
+			{
+				if($this->M_emails->is_post_visible($post_id,$user_id))
+				{
+					$post_username = $this->Model->get_username($post_user_id);
+				}
+			}
+			
+			
 
 			$data[$quarter][$post_id] = array(
 				'post_id' => $row->post_id,

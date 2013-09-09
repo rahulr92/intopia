@@ -126,3 +126,40 @@ $("#delete_post_frm").submit(function() {
     });
 
 
+$(function() {
+
+   $("#title").popover({ title: 'Step1', content: 'Enter a relevent title' , trigger:'focus'});
+   $("#desc").popover({ title: 'Step2', content: 'Enter a brief description', trigger:'focus' });
+      $("#post_type").popover({ title: 'Step3', content: 'Select the type of post', trigger:'focus' });
+         $("#post_period").popover({ title: 'Step4', content: 'Select the quarter to which you want to post', trigger:'focus' });
+            $("#post_visib").popover({ title: 'Step5', content: 'Choose your post visibility', trigger:'hover' });
+$("#post_period").blur(function(){
+  $('#post_visib').popover('show');
+});
+ $("#title").focus();
+
+
+  
+});
+
+
+$('#anony_flag').click(function(){
+ if($('#anony_flag').is(':checked')){
+      $('.team_check').attr('checked', false);
+  $("input[name=full_visibility]").attr('checked', false);
+ }
+});
+
+$('.team_check').click(function(){
+ if($(this).is(':checked')){
+ $('#anony_flag').attr('checked', false);
+  $('input[name=full_visibility]').attr('checked', false);
+}
+});
+
+$('input[name=full_visibility]').click(function(){
+ if($(this).is(':checked')){
+ $('#anony_flag').attr('checked', false);
+   $('.team_check').attr('checked', false);
+}
+});

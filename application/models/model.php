@@ -71,6 +71,11 @@ class Model extends CI_Model {
 		
 	}
 
+	public function insert_post_visibility($post_id,$user_id){
+		$data = array('post_id' => $post_id,
+			'user_id' => $user_id);
+		$this->db->insert('post_visibility',$data );
+}
 
 }
 ?>

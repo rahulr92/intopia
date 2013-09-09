@@ -11,7 +11,8 @@ class M_login extends CI_Model {
 		 if($query->num_rows() > 0){
 			$newdata = array(
                    'username'  => $uname,
-                   'user_id' => $query->last_row()->user_id
+                   'user_id' => $query->last_row()->user_id,
+                   	'teamname' => $query->last_row()->teamname
                );
 			$this->session->set_userdata($newdata);
 		 	return 1;
