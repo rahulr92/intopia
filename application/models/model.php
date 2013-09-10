@@ -84,5 +84,19 @@ class Model extends CI_Model {
 		$this->db->insert('post_visibility',$data );
 }
 
+public function get_post_visibility($post_id){
+	$this->db->where('post_id', $post_id);
+	$query = $this->db->get('post_visibility' );
+		if($query->num_rows() > 0)
+			return $query->result();
+}
+
+	public function delete_post_visibility($post_id){
+		$this->db->where('post_id', $post_id);
+		$this->db->delete('post_visibility');
+}
+
+
+
 }
 ?>

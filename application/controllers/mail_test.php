@@ -95,23 +95,9 @@ echo $this->email->print_debugger();
 		$period = $this->input->post('period');
 		$anony_flag = ($this->input->post('anony_flag') == 1)?1:0;
 		$user_id = $this->session->userdata('user_id');
-		$full_visibility = ($this->input->post('full_visibility') == 1)?1:0;
 		$data = array('title' => $title,'desc' => $desc, 'type_id' => $type, 'period' => $period, 
-			'status_id'=>'1','user_id'=>$user_id,'anony_flag' => $anony_flag, 'full_visibility' =>$full_visibility);
+			'status_id'=>'1','user_id'=>$user_id,'anony_flag' => $anony_flag);
 		$this->M_posting->update_posting($post_id,$data);
-
-			if(!$anony_flag){
-				if(!$full_visibility){
-					$this->Model->delete_post_visibility($post_id);
-				for($i=1;$i<=12;$i++){
-						if($this->input->post("check_team$i"))
-							{
-								$this->Model->insert_post_visibility($post_id,$this->input->post("check_team$i"));
-							}
-				}	
-			}
-		}
-
 		$this->index();
 	}
 
@@ -145,18 +131,7 @@ echo $this->email->print_debugger();
 	{
 		$post_id=$this->input->post('post_id');
 		$post = $this->Model->get_post($post_id);
-		$teams = $this->Model->get_teams();
-		$team_visib = Array();
-		foreach ($teams as $team ) {
-			if($this->M_emails->is_post_visible($post_id,$team->user_id))
-				$team_visib[$team->user_id] = 1;
-				else
-				$team_visib[$team->user_id] = 0;
-			}				
-		
-
-		$data = array('title' => 'Update Post','main_content' => 'edit_v', 'post'=>$post,
-				 'teams' => $teams, 'team_visib'=>$team_visib);
+		$data = array('title' => 'Update Post','main_content' => 'edit_v', 'post'=>$post);
 		$this->load->view('template',$data);
 		//redirect('/main/','location',301);
 

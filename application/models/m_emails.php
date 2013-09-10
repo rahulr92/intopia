@@ -216,21 +216,26 @@ $thread_id = $data['thread_id'];
 $this->send_mail($user_id,$post_id,$thread_id);
 $this->db->insert('emails',$data);
 }
-
 public function send_mail($user_id,$post_id,$thread_id){
-$email_id = $this->get_username('user_id');
-$url = base_url("login/show_thread/$user_id/$post_id/$thread_id");
-$msg = "You have a new message at Intopia Listing. 
-	Click here to view it: <a href=$url>$url</a>";
+
 $this->load->library('email');
-$this->email->from('admin@intopia.com', 'admin');
+
+$email_id = "rahulr92@gmail.com";
+$url = base_url("index.php/login/show_thread/$user_id/$post_id/$thread_id");
+$msg = "You have a new message at Intopia Listing.\r\n 
+	Click here to view it: $url";
+
+$this->email->from('admin@intopia.com', 'Admin');
 $this->email->to($email_id); 
 $this->email->subject('New Message - Intopia Listing');
 $this->email->message($msg);	
 
 $this->email->send();
 
+//echo $this->email->print_debugger();
+
 }
+
 
 public function reply_thread(){
 
