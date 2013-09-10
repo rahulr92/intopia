@@ -28,7 +28,7 @@ $msg_url = base_url('index.php/main/reply');
 		<textarea name='msg' class='' rows='2' cols='60' placeholder="Message"></textarea></br>
 		<span>Make anonymous</span>
 		<input id = 'Checked1' type='checkbox' class='hide_closed' value='1' name='anony_flag' /></br>
-		<input type='submit' class='btn btn-success' value='Send' $close_btn>
+		<input type='submit' class='btn btn-success' id='submit_reply' value='Send' >
 		</form>
 	</div>
 	 <div class="owner">

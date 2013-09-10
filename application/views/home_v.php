@@ -27,7 +27,10 @@ if(isset($thread_details)){
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
   </div>
-        <input type="submit" id="submit" class="btn btn-primary" value="Log in"></br>
+          <div class="form-group">
+          <input type="submit" id="submit" class="btn btn-primary" value="Log in"></br>
+  </div>
+        </form>
+        <a href="<?php echo base_url('index.php/login/forgot'); ?>">Forgot your password?</a></br>
         <?php
-        if($team_count < 12) { echo "<a href=".base_url('index.php/register').">Register</a>"; }?></br>
-</form>
+        if(isset($team_count)){if($team_count < 12) { echo "<a href=".base_url('index.php/register').">Register</a>"; }}?></br>

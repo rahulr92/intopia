@@ -38,6 +38,22 @@ class Login extends CI_Controller {
 
 	}
 
+	public function forgot()
+	{
+		
+		$data = array('title' => 'Intopia Listing','main_content' => 'forgot_pswd_v');
+		$this->load->view('template',$data);
+
+	}
+	public function mail_pswd()
+	{
+		$this->M_login->mail_pswd();
+		$msg = array('msg' => "Your password has been mailed to given email address.");
+		$this->load->view('alert_v',$msg);	
+		$data = array('title' => 'Intopia Listing','main_content' => 'home_v');
+		$this->load->view('template',$data);
+
+	}
 
 	public function thread_login()
 	{

@@ -31,21 +31,39 @@ class Main extends CI_Controller {
 	}
 
 
-	public function mail_test()
+	public function edit_prof()
 	{
-
-		$email_id = "rahulr92@gmail.com";
-$msg = "You have a new message at Intopia Listing.";
-$this->load->library('email');
-$this->email->from('admin@intopia.com', 'admin');
-$this->email->to($email_id); 
-$this->email->subject('New Message - Intopia Listing');
-$this->email->message($msg);	
-
-$this->email->send();
-
-echo $this->email->print_debugger();
+		$team = $this->Model->get_team($this->session->userdata('user_id'));
+		$data = array('title' => 'Create New Post','main_content' => 'edit_prof_v', 'team' => $team);
+		$this->load->view('template',$data);
 	}
+	public function update_prof()
+	{
+		$user_id= $this->input->post('user_id');
+		$uname= $this->input->post('username');
+		$pswd= $this->input->post('opassword');
+		$npswd= $this->input->post('npassword');
+		$cnpswd= $this->input->post('cnpassword');
+		$teamname = $this->input->post('teamname');
+		if($npswd == $cnpswd) $pswd = $npswd;
+		$reg_details = array('username' => $uname,
+								'password' => $pswd,
+								'teamno' =>$this->input->post('teamno'),
+								'teamname' => $teamname);
+		$flag = $this->M_register->update($reg_details,$user_id);
+		if($flag)
+		{
+			$msg = array('msg' => "Profile updated successfully!");
+			$this->session->set_userdata("teamname",$teamname);
+		}
+		else
+			$msg = array('msg' => "Invalid data. Update failed.");
+				
+		$this->load->view('alert_v',$msg);
+		$this->get_posts(); 
+	}
+		
+
 
 
 	public function posting()
@@ -207,7 +225,7 @@ echo $this->email->print_debugger();
 
 			$post_id = $row->post_id;
 			$post_user_id = $row->user_id;
-			$post_username = "Anonymous";
+			$post_teamname = "Anonymous";
 			if(!$row->anony_flag)
 			{
 				if($this->M_emails->is_post_visible($post_id,$user_id))

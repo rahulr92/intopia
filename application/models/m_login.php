@@ -20,6 +20,36 @@ class M_login extends CI_Model {
 	return 0;
 	}
 
+		public function mail_pswd(){
+			$uname = $this->input->post('username');
+		$this->db->where('username',$uname);
+		$this->db->select('password');
+		$pswd = "";
+		$query = $this->db->get('users');
+		 if($query->num_rows() > 0){
+                   	$pswd = $query->last_row()->password;
+
+$this->load->library('email');
+
+$email_id =  $uname;
+$url = base_url("index.php/login/");
+$msg = "Your account password is $pswd.\r\n 
+	Click here to login: $url";
+
+$this->email->from('admin@intopia.com', 'Admin');
+$this->email->to($email_id); 
+$this->email->subject('Account Password- Intopia Listing');
+$this->email->message($msg);	
+
+$this->email->send();
+
+
+		 	return 1;
+		 }
+	return 0;
+	}
+
+
 }
 
 ?>

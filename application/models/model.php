@@ -52,6 +52,13 @@ class Model extends CI_Model {
 	}
 
 
+		public function get_team($user_id){
+		$this->db->where("user_id", $user_id); 
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+			return $query->last_row();
+	}
+
 
 	public function change_status($post_id, $status){
 		$data = array(

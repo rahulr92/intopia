@@ -52,3 +52,7 @@ table { table-layout: fixed; }
 #posting_frm {
 	width: 80%;
 }
+
+#menu_drop {
+	color: white;
+}

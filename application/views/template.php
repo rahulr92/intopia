@@ -29,7 +29,8 @@
             <![endif]-->
 
             <!-- Add your site or application content here -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
+
+ <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,14 +44,21 @@
               <ul class="nav navbar-nav">
                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/posting')."'>New Post</a>"; } ?></li>
                      <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/emails/list_mails')."'>Messages</a>"; } ?></li>
-                         <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/logout')."'>Logout</a>"; } ?></li>
-             
+                        
               </ul>
-
               <ul class="nav pull-right">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php if($this->session->userdata('user_id')) {echo "Welcome ".$this->session->userdata('teamname');} ?>
-                  </a>
+                    <a href="" class="dropdown-toggle" id ="menU-drop" data-toggle="dropdown">
+                    <?php 
+                    if($this->session->userdata('user_id')) {
+                        echo "Welcome ".$this->session->userdata('teamname'); 
+                    echo "<b class='caret'></b></a>";
+                } ?>
+                    
+    <ul class="dropdown-menu">
+      <li><a href="<?php echo base_url('index.php/main/edit_prof'); ?>">Edit Profile</a></li>
+        <li class="divider"></li>
+      <li><a href="<?php echo base_url('index.php/main/logout'); ?>">Log out</a></li>
+    </ul>
           </ul>
             </div><!--/.navbar-collapse -->
           </div>

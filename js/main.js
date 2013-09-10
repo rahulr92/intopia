@@ -75,6 +75,7 @@ $(function() {
            {
             $('#status_btn').val('Reopen post');
             $('#status_toggle_flag').val('1');
+            $('#submit_reply').prop('disabled', true);
            }
            if(window.user_id == post_user_id)
            {
