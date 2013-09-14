@@ -22,7 +22,7 @@
   </tr>
   <tr>
     <td nowrap="">Company Sending Cash:</td>
-    <td><input type="text" name="company-sending-cash" value="<?php echo $this->session->userdata('teamname'); ?>" disabled=""></td>
+    <td><input type="text" name="company-sending-cash" value="<?php echo $this->Model->get_teamname($form->user_id); ?>" disabled=""></td>
   </tr>
   <tr>
     <td nowrap="">Area Sending Money from<font style="color:red">*</font>:</td>

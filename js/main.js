@@ -179,19 +179,13 @@ $('.plant_no').change(function(){
 $(function(){
   $('.inventory_sval').each(function(){
   var inventory_val = $(this).html();
-      console.log(inventory_val);
-
    var rates_val = $(this).siblings('.rates_val').html();
-         console.log(rates_val);
  $(this).siblings('.premium_val').html(inventory_val*rates_val);
  calc_total();
   });
   $('.plant_sno').each(function(){
   var inventory_val = $(this).html();
-      console.log(inventory_val);
-
    var rates_val = $(this).siblings('.rates_val').html();
-         console.log(inventory_val);
  $(this).siblings('.premium_val').html(inventory_val*rates_val);
  calc_total();
 });
@@ -208,4 +202,35 @@ function calc_total(){
      total_premium= total_premium + curr_premium;
   });
 $('#total_premium').val(total_premium);
+}
+
+
+function validate_insurance_frm(){
+  var submit_flag = 1;
+  $('.inventory_val').each(function(){
+    var inventory_val = $(this).val();
+    if(inventory_val == 0){
+     submit_flag = 0;
+     console.log("inv");
+   }
+ });
+  if(submit_flag){
+   $('.plant_no').each(function(){
+    var plant_no = $(this).val();
+    if(plant_no == 0){
+      submit_flag = 0;
+      console.log("plan");  
+    }
+  });
+ }
+ if(!$('#esign').is(':checked')){
+      submit_flag = 0;  
+      console.log("inv");
+ }
+
+ if(submit_flag == 0){
+  alert("Please complete form before submitting!");
+  return false;
+}
+
 }

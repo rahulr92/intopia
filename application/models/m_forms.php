@@ -5,7 +5,7 @@ class M_forms extends CI_Model {
 	}
 
 	public function submit_insurance_frm($data){
-	$this->db->insert('insurance_table',$data);
+	 return $this->db->insert('insurance_table',$data);
 
 	
 	}

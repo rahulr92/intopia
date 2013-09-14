@@ -24,7 +24,7 @@
 <h2>Imperial Insurance Co.</h2>
 
 <b>Note: All Payments in 000s and <font style="color:red">*</font> = required</b><br><br>
-<form method="POST" action="<?php echo base_url('index.php/user_forms/submit_insurance_frm') ?>" >
+<form method="POST" id="insurance_frm" onsubmit="return validate_insurance_frm();" action="<?php echo base_url('index.php/user_forms/submit_insurance_frm') ?>" >
 <table border="1" cellpadding="5">
   <tbody><tr>
     <td>Period<font style="color:red">*</font>:</td>
@@ -406,8 +406,8 @@ factory(ies).
 
 <table border="1" cellpadding="5">
   <tbody><tr>
-    <td>Check box to electronically sign this insurance form as the Buyer Company's President<font style="color:red">*</font>:</td>
-    <td><input type="checkbox" name="e-signature"></td>
+    <td>Check box to electronically sign this insurance form as the <?php echo $this->session->userdata('teamname'); ?>'s President<font style="color:red">*</font>:</td>
+    <td><input type="checkbox" id="esign" name="e-signature"></td>
   </tr>
   <tr>
     <td colspan="2"><input type="submit" class="btn btn-default" value="Submit Insurance Purchase Agreement"></td>

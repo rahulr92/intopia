@@ -30,10 +30,8 @@ class Main extends CI_Controller {
 			$this->get_posts();
 	}
 
-	public function admin()
-	{
-	$data = array('title' => 'Intopia - Admin View','main_content' => 'admin_v');
-		$this->load->view('template',$data);
+	public function admin(){
+	$this->get_posts();
 	}
 
 	public function edit_prof()
