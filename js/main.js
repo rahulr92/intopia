@@ -158,3 +158,54 @@ $('input[name=full_visibility]').click(function(){
    $('.team_check').attr('checked', false);
 }
 });
+
+$('.inventory_val').change(function(){
+  var inventory_val = $(this).val();
+   var rates_val = $(this).parent().siblings('.rates_val').html();
+ $(this).parent().siblings('.premium_val').html(inventory_val*rates_val);
+ calc_total();
+});
+
+$('.plant_no').change(function(){
+  var inventory_val = $(this).val();
+   var rates_val = $(this).parent().siblings('.rates_val').html();
+ $(this).parent().siblings('.premium_val').html(inventory_val*rates_val);
+ calc_total();
+});
+
+
+//two functions dealing with same classes - but one for vieewing nad other while editing
+//might create overlapping issues if not careful enough
+$(function(){
+  $('.inventory_sval').each(function(){
+  var inventory_val = $(this).html();
+      console.log(inventory_val);
+
+   var rates_val = $(this).siblings('.rates_val').html();
+         console.log(rates_val);
+ $(this).siblings('.premium_val').html(inventory_val*rates_val);
+ calc_total();
+  });
+  $('.plant_sno').each(function(){
+  var inventory_val = $(this).html();
+      console.log(inventory_val);
+
+   var rates_val = $(this).siblings('.rates_val').html();
+         console.log(inventory_val);
+ $(this).siblings('.premium_val').html(inventory_val*rates_val);
+ calc_total();
+});
+
+});
+
+
+
+function calc_total(){
+  var total_premium = 0;
+  var curr_premium = 0;
+  $('.premium_val').each(function(){
+    curr_premium= parseInt($(this).html(), 10);
+     total_premium= total_premium + curr_premium;
+  });
+$('#total_premium').val(total_premium);
+}

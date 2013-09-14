@@ -38,13 +38,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<?php echo base_url('index.php/main'); ?>">Intopia Listing</a>
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                    <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/main/posting')."'>New Post</a>"; } ?></li>
-                     <li><?php if($this->session->userdata('user_id')) {echo "<a href='".base_url('index.php/emails/list_mails')."'>Messages</a>"; } ?></li>
+                    <?php 
+                if($this->session->userdata('user_id')) {
+                    if ($this->session->userdata('username') === "admin@intopia.com") {
+                        echo "<a class='navbar-brand' href=".base_url('index.php/main/admin').">Intopia Listing</a>";
+                        echo "<li><a href='".base_url('index.php/user_forms/admin')."'>Insurance Forms</a>";
+                        }
+                        else
+                        {
+                    echo "<a class='navbar-brand' href=".base_url('index.php/main').">Intopia Listing</a>";
+                     echo "<li><a href='".base_url('index.php/main/posting')."'>New Post</a></li>"; 
+                    echo "<li><a href='".base_url('index.php/emails/list_mails')."'>Messages</a></li>";
+                    echo "<li><a href='".base_url('index.php/user_forms')."'>Insurance Forms</a></li>";
                         
+                        }
+                    }
+                   ?>
               </ul>
               <ul class="nav pull-right">
                     <a href="" class="dropdown-toggle" id ="menU-drop" data-toggle="dropdown">

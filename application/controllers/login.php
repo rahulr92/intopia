@@ -15,7 +15,10 @@ class Login extends CI_Controller {
 		$pswd= $this->input->post('password');
 		$flag = $this->M_login->login($uname, $pswd);
 		if($flag) {
-			redirect('/main/','location',301);
+			if($uname=== "admin@intopia.com")
+					redirect('/main/admin','location',301);
+				else
+					redirect('/main/','location',301);
 		// $data = array('title' => 'Intopia','main_content' => 'main_v');
 		// $this->load->view('template',$data);
 		}
