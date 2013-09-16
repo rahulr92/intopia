@@ -59,15 +59,15 @@ class User_forms extends CI_Controller {
 				);
 			
 			if($this->M_forms->submit_insurance_frm($data)){
-							$msg = array('msg' => "Insurance form sucessfully submitted.");
+							$msg =  "Insurance form sucessfully submitted.";
 			} else
 			{
-						$msg = array('msg' => "Invalid data. Submission failed!");
+						$msg =  "Invalid data. Submission failed!";
 
 			}
 
-					$this->load->view('alert_v',$msg);
-					$this->index();
+					$this->session->set_flashdata('alert_msg', $msg );
+					redirect('/user_forms/','location',301);
 	}
 
 }

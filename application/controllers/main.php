@@ -56,14 +56,15 @@ class Main extends CI_Controller {
 		$flag = $this->M_register->update($reg_details,$user_id);
 		if($flag)
 		{
-			$msg = array('msg' => "Profile updated successfully!");
+			$msg =  "Profile updated successfully!";
 			$this->session->set_userdata("teamname",$teamname);
 		}
 		else
-			$msg = array('msg' => "Invalid data. Update failed.");
+			$msg =  "Invalid data. Update failed.";
 				
-		$this->load->view('alert_v',$msg);
-		$this->get_posts(); 
+		$this->session->set_flashdata('alert_msg', $msg );
+		redirect('/main/','location',301);
+
 	}
 		
 
@@ -103,7 +104,8 @@ class Main extends CI_Controller {
 			}
 		}
 
-		$this->index();
+		$this->session->set_flashdata('alert_msg', "Posted successfully!" );
+		redirect('/main/','location',301);
 	}
 
 
@@ -133,7 +135,9 @@ class Main extends CI_Controller {
 			}
 		}
 
-		$this->index();
+		$this->session->set_flashdata('alert_msg', "Post updated successfully!" );
+		redirect('/main/','location',301);
+		
 	}
 
 	public function logout()
@@ -186,9 +190,8 @@ class Main extends CI_Controller {
 	public function reply()
 	{
 		$this->M_emails->reply();
-		$msg = array('msg' => "Reply sent successfully!");
-		$this->load->view('alert_v',$msg);
-		$this->get_posts(); 
+		$this->session->set_flashdata('alert_msg', "Reply sent successfully!" );
+		redirect('/main/','location',301);
 	}
 
 	public function reply_thread()

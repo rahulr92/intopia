@@ -1,4 +1,4 @@
-<h1>Conversation for <?php echo $post->title; ?></h1>
+<h1>Conversation for: <?php echo $post->title; ?></h1>
 <?php
  $user_id = $this->session->userdata('user_id');
 $msg_url = base_url('index.php/main/reply_thread');

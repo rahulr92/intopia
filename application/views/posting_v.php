@@ -1,6 +1,5 @@
 <?php
         $user_id = $this->session->userdata('user_id');
-echo "<h1>$user_id</h1>";
 ?>
 <form id="posting_frm" method="post" role="form"  action="<?php echo base_url('index.php/main/submit_posting'); ?>">
     <h1>Create New Post</h1>

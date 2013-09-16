@@ -1,5 +1,5 @@
 <h1>Message List</h1>
-<h2>Replies to your posts</h2>
+<h2>Replies to your posts:</h2>
 <table class="table table-hover">
 	<tbody>
 		<?php
@@ -26,7 +26,7 @@
 		<table class="table table-hover">
 		<tbody>
 		<?php
-		echo "<h2>Posts you replied</h2>";
+		echo "<h2>Posts you replied:</h2>";
 	if(is_array($s_posts)){
 		foreach ($s_posts as $post ) {
 			$title = $post->title;

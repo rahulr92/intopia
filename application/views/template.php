@@ -77,12 +77,19 @@
         </div>
 
             <div id="container" class="container">
+                <div id="body">
                     <?php 
-                       
+                       if($this->session->flashdata('alert_msg'))
+                       {
+                        //echo $this->session->flashdata('alert_msg');
+                        echo "<div id='alert'><a class='close' data-dismiss='alert'>×</a><span>".
+                        $this->session->flashdata('alert_msg')."</span></div>";
+                       }
                         $this->load->view($main_content); ?>
-                 <footer>
+                    </div>
+                 <div id="footer">
                     <?php $this->load->view('includes/footer'); ?>
-                </footer>
+                </div>
             </div>
      
 

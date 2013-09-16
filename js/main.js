@@ -1,4 +1,5 @@
 $(function() {
+    $('#apply_insurance_frm').hide();
      $('.reply_frm').hide();
      $('.desc').hide();
 
@@ -234,3 +235,8 @@ function validate_insurance_frm(){
 }
 
 }
+
+
+$('#apply_insurance_btn').click( function(){
+  $('#apply_insurance_frm').slideToggle();
+  });

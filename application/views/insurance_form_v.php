@@ -9,8 +9,9 @@
         foreach ($forms as $form ) {
             $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
             $insurance_id = $form->insurance_id;
+            $period = $form->period_id;
             echo "<tr";
-            echo "><td><a href='$insur_detail_url/$insurance_id'>View form</a></td>
+            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance Request</a></td>
             <td>$date</td>";
             echo "</tr>";
         }
@@ -18,7 +19,8 @@
         ?>
         </tbody></table>
 
-<div>
+<button class="btn btn-default" id="apply_insurance_btn">Apply for Insurance</button>
+<div id="apply_insurance_frm" class="">
 
 <h1>Submit Insurance Form</h1>
 <h2>Imperial Insurance Co.</h2>
@@ -29,18 +31,18 @@
   <tbody><tr>
     <td>Period<font style="color:red">*</font>:</td>
     <td><select name="period">
-    		<option value="Q1" selected="">Q1</option>
-    		<option value="Q2">Q2</option>
-    		<option value="Q3">Q3</option>
-    		<option value="Q4">Q4</option>
-    		<option value="Q5">Q5</option>
-    		<option value="Q6">Q6</option>
-    		<option value="Q7">Q7</option>
-    		<option value="Q8">Q8</option>
-    		<option value="Q9">Q9</option>
-    		<option value="Q10">Q10</option>
-    		<option value="Q11">Q11</option>
-    		<option value="Q12">Q12</option>
+    		<option value="1" selected="">Q1</option>
+    		<option value="2">Q2</option>
+    		<option value="3">Q3</option>
+    		<option value="4">Q4</option>
+    		<option value="5">Q5</option>
+    		<option value="6">Q6</option>
+    		<option value="7">Q7</option>
+    		<option value="8">Q8</option>
+    		<option value="9">Q9</option>
+    		<option value="10">Q10</option>
+    		<option value="11">Q11</option>
+    		<option value="12">Q12</option>
         </select></td>
   </tr>
   <tr>
