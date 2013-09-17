@@ -208,34 +208,33 @@ $('#total_premium').val(total_premium);
 
 function validate_insurance_frm(){
   var submit_flag = 1;
-  $('.inventory_val').each(function(){
-    var inventory_val = $(this).val();
-    if(inventory_val == 0){
-     submit_flag = 0;
-     console.log("inv");
-   }
- });
-  if(submit_flag){
-   $('.plant_no').each(function(){
-    var plant_no = $(this).val();
-    if(plant_no == 0){
-      submit_flag = 0;
-      console.log("plan");  
-    }
-  });
- }
+  //add other checks
  if(!$('#esign').is(':checked')){
-      submit_flag = 0;  
-      console.log("inv");
+  alert("Oops, you forgot to sign your insurance form. Please try again.!");
+  return false;
  }
 
- if(submit_flag == 0){
-  alert("Please complete form before submitting!");
-  return false;
-}
+if($('#ins_period').val()==0)
+submit_flag = 0;
+
+
+if($('#area-sending').val()==0)
+submit_flag = 0;
+
+
+if($('#currency-no').val()==0)
+submit_flag = 0;
+
+
+if(submit_flag == 0)
+{
+    alert("Please complete all options marked with a red * to submit your insurance form!");
+    return false;
 
 }
 
+
+}
 
 $('#apply_insurance_btn').click( function(){
   $('#apply_insurance_frm').slideToggle();

@@ -1,14 +1,21 @@
-<?php
+ </br>
+   <?php      
+   if ($this->session->userdata('username') === "admin@intopia.com")
+        $insur_url = base_url('index.php/user_forms/admin'); 
+    else        
+         $insur_url = base_url('index.php/user_forms/'); 
+        echo "<a href='$insur_url'>Back to Insurance Forms Page</a>";
+        $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
 ?>
 <div>
-
-<h1>Imperial Insurance Co.</h1>
-
-<b>Note: All Payments in 000s and <font style="color:red">*</font> = required</b><br><br>
+<h1>Q<?php echo $form->period_id; ?> Insurance Request with Imperial Insurance Co.</h1>
+<span>Submitted on <?php echo $date; ?></span>
+</br>
+<b>Note: All Payments in 000s<br><br>
 <form method="POST" action="<?php echo base_url('index.php/user_forms/submit_insurance_frm') ?>" >
 <table border="1" cellpadding="5">
   <tbody><tr>
-    <td>Period<font style="color:red">*</font>:</td>
+    <td>Period:</td>
     <td>Q<?php echo $form->period_id; ?>
        </td>
   </tr>
@@ -25,16 +32,16 @@
     <td><input type="text" name="company-sending-cash" value="<?php echo $this->Model->get_teamname($form->user_id); ?>" disabled=""></td>
   </tr>
   <tr>
-    <td nowrap="">Area Sending Money from<font style="color:red">*</font>:</td>
+    <td nowrap="">Area Sending Money from:</td>
     <td>
       <?php
-      $area_sending = array('1' => "US (1)",'2'=>">EC (2)", '3' => "BR (3)", '4' => "Home Office (4)" );
+      $area_sending = array('1' => "US (1)",'2'=>"EC (2)", '3' => "BR (3)", '4' => "Home Office (4)" );
       echo $area_sending[$form->money_area_id];
       ?>
     </td>
   </tr>
   <tr>
-    <td nowrap="">Payment Currency in<font style="color:red">*</font>:</td>
+    <td nowrap="">Payment Currency in:</td>
     <td>  
       <?php
       $currency = array('1' => "Dollars (1)", '2' => "Euros (2)", '3' => "Reais (3)", '4' => "Francs (4)" );

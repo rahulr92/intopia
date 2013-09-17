@@ -11,11 +11,14 @@
             $insurance_id = $form->insurance_id;
             $user_id = $form->user_id;
             $teamname = $this->Model->get_teamname($user_id);
+            $period = $form->period_id;
+            echo "<tr";
+            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
+            <td>$teamname</td>
+            <td>$date</td>";
+            echo "</tr>";
 			echo "<tr";
-			echo "><td><a href='$insur_detail_url/$insurance_id'>View form</a></td>
-			<td>$teamname</td>
-			<td>$date</td>";
-			echo "</tr>";
+
 		}
 	}
 	else

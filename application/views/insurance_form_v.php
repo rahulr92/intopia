@@ -11,7 +11,7 @@
             $insurance_id = $form->insurance_id;
             $period = $form->period_id;
             echo "<tr";
-            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance Request</a></td>
+            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
             <td>$date</td>";
             echo "</tr>";
         }
@@ -30,8 +30,9 @@
 <table border="1" cellpadding="5">
   <tbody><tr>
     <td>Period<font style="color:red">*</font>:</td>
-    <td><select name="period">
-    		<option value="1" selected="">Q1</option>
+    <td><select id="ins_period" name="period">
+    		<option value="0" selected="">Select Period</option>
+            <option value="1">Q1</option>
     		<option value="2">Q2</option>
     		<option value="3">Q3</option>
     		<option value="4">Q4</option>
@@ -59,8 +60,9 @@
   </tr>
   <tr>
     <td nowrap="">Area Sending Money from<font style="color:red">*</font>:</td>
-    <td><select name="area-sending">
-    		<option value="4" selected="">Home Office (4)</option>
+    <td><select id="area-sending" name="area-sending">
+    		<option value="0" selected="">Select Area</option>
+            <option value="4">Home Office (4)</option>
     		<option value="1">US (1)</option>
     		<option value="2">EC (2)</option>
     		<option value="3">BR (3)</option>
@@ -68,8 +70,9 @@
   </tr>
   <tr>
     <td nowrap="">Payment Currency in<font style="color:red">*</font>:</td>
-    <td><select name="currency-no">
-    		<option value="4" selected="">Francs (4)</option>
+    <td><select  id="currency-no" name="currency-no">
+            <option value="0" selected="">Select Currency</option>
+    		<option value="4">Francs (4)</option>
     		<option value="1">Dollars (1)</option>
     		<option value="2">Euros (2)</option>
     		<option value="3">Reais (3)</option>

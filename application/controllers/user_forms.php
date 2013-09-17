@@ -27,9 +27,22 @@ class User_forms extends CI_Controller {
 	public function insurance()
 	{
 		
-		$data = array('title' => 'Intopia Listing','main_content' => 'insurance_form_v');
+		$user_id = $this->session->userdata('user_id');
+		$forms = $this->M_forms->get_insurance_frms($user_id);
+		$data = array('title' => 'Insurance Forms','main_content' => 'insurance_form_v', 'forms' =>$forms);
 		$this->load->view('template',$data);
 	}
+
+		public function nec()
+	{
+		
+		$user_id = $this->session->userdata('user_id');
+		$forms = $this->M_forms->get_nec_frms($user_id);
+		$data = array('title' => 'Insurance Forms','main_content' => 'nec_form_v', 'forms' =>$forms);
+		$this->load->view('template',$data);
+	}
+
+
 
 
 	public function view_insurance($insur_id)
@@ -55,21 +68,21 @@ class User_forms extends CI_Controller {
 				'br_chip_no'	=>	$this->input->post('chip-plants-br'),
 				'us_pc_no'	=>	$this->input->post('pc-plants-us'),
 				'ec_pc_no'	=>	$this->input->post('pc-plants-ec'),
-				'br_pc_no'	=>	$this->input->post('chip-plants-br')
+				'br_pc_no'	=>	$this->input->post('pc-plants-br')
 				);
 			
 			if($this->M_forms->submit_insurance_frm($data)){
-							$msg =  "Insurance form sucessfully submitted.";
+							$msg =  "Insurance form successfully submitted.";
 			} else
 			{
 						$msg =  "Invalid data. Submission failed!";
 
 			}
 
-					$this->session->set_flashdata('alert_msg', $msg );
 					redirect('/user_forms/','location',301);
+					$this->session->set_flashdata('alert_msg', $msg );
+
 	}
 
 }
 ?>
-
