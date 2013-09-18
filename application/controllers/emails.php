@@ -24,7 +24,9 @@ class Emails extends CI_Controller {
 		foreach ($threads as $thread ) {
 			$thread_id=$thread->thread_id;
 			$mail = $this->M_emails->get_latest_mail($thread_id);
-			$user = $this->Model->get_username($mail->sender_id);
+			$sender_id = $this->M_emails->get_thread_sender($thread_id);
+			$user =($this->M_emails->is_anony($thread_id,$sender_id)==1)?
+									"Anonymous":$this->M_emails->get_teamname($sender_id);
 			$thread_len = $this->M_emails->get_thread_len($thread_id);
 			$threads_arr[$thread_id] = array(
 					'last_msg' => $mail,
@@ -42,10 +44,17 @@ class Emails extends CI_Controller {
 		$threads = $this->M_emails->get_mails_by_thread($thread_id);
 		$users=$this->M_emails->get_thread_users($thread_id);
 				$post = $this->Model->get_post($post_id);
-		$this->M_emails->mark_as_read($thread_id);
+		if($this->M_emails->get_last_sender($post_id,$thread_id) != $this->session->userdata('user_id'))
+					$this->M_emails->mark_as_read($thread_id);
 			$data = array('title' => 'Intopia Listing','main_content' => 'mails_v','threads'=>$threads, 
 						'thread_id' => $thread_id, 'post' => $post, 'users'=>$users);
 			 $this->load->view('template',$data);
+	}
+
+	public function last_sender($post_id,$thread_id){
+		
+	$this->M_emails->get_last_sender($post_id,$thread_id);
+			
 	}
 
 }

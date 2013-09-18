@@ -20,10 +20,12 @@
             <label for="period">Quarter</label> 
             <select class="form-control" id="post_period" name="period">
               <?php 
-              for($i =1; $i<=12; $i++)
-               echo "<option value='$i'";
+              for($i =1; $i<=12; $i++){
+                 echo "<option value='$i'";
            if($post->period==$i) echo "selected='selected'"; 
            echo ">Q$i</option>"; 
+              }
+              
            ?>
        </select></div>
        <div id="post_visib">

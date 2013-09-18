@@ -12,7 +12,6 @@
 			$title = $post->title;
 			$post_id = $post->post_id;
 			$read_status =  $this->M_emails->get_post_rstatus($post_id);
-			
 			echo "<tr";
 			if($read_status ==0) echo " class='success'";
 			echo "><td><a href='$thread_list_url/$post_id'>$title</a></td>";
@@ -34,7 +33,9 @@
 			$thread_id = $this->M_emails->get_thread_by_sender_post($user_id, $post_id);
 			$mail = $this->M_emails->get_latest_mail($thread_id);
 			$read_status = $mail->status;
-			
+			//the last sender was the current user. hence read
+			if($mail->sender_id == $this->session->userdata('user_id'))
+				$read_status = 1;
 			echo "<tr";
 			if($read_status ==0) echo " class='success'";
 			echo "><td><a href='$thread_detail_url/$post_id/$thread_id'>$title</a></td>";

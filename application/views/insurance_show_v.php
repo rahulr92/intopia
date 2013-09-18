@@ -4,14 +4,14 @@
         $insur_url = base_url('index.php/user_forms/admin'); 
     else        
          $insur_url = base_url('index.php/user_forms/'); 
-        echo "<a href='$insur_url'>Back to Insurance Forms Page</a>";
+        echo "<a href='$insur_url'>Back to Insurance Form listing page</a>";
         $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
 ?>
 <div>
 <h1>Q<?php echo $form->period_id; ?> Insurance Request with Imperial Insurance Co.</h1>
 <span>Submitted on <?php echo $date; ?></span>
 </br>
-<b>Note: All Payments in 000s<br><br>
+<b>Note: All Payments in 000s</b><br><br>
 <form method="POST" action="<?php echo base_url('index.php/user_forms/submit_insurance_frm') ?>" >
 <table border="1" cellpadding="5">
   <tbody><tr>

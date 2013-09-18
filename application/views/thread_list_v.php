@@ -1,4 +1,4 @@
-<h1>Conversations for <?php echo $post_title; ?></h1>
+<h1>Conversations for: <?php echo $post_title; ?></h1>
 		</tbody></table>
 		<table class="table table-hover">
 		<tbody>
@@ -9,13 +9,13 @@
 			$sender = $thread['sender'];
 			$thread_len = $thread['thread_len'];
 			$read_status = $last_msg->status;
-			 $last_reply__date = date('D, M j Y g:i A', strtotime($last_msg->timestamp ));
+			 $last_reply_date = date('D, M j Y g:i A', strtotime($last_msg->timestamp ));
 			$snippet = (strlen($last_msg->msg) > 80)?substr($last_msg->msg,0,80)."...":$last_msg->msg;
 			echo "<tr";
-			if($read_status ==0) echo " class='success'";
+			if($read_status ==0 && $last_msg->sender_id !== $this->session->userdata('user_id')) echo " class='success'";
 			echo "><td>$sender</td>
 			<td><a href='$thread_detail_url/$post_id/$thread_id'>$snippet ($thread_len)</a></td>
-			<td>$last_reply__date</td>
+			<td>$last_reply_date</td>
 			</tr>";
 
 		}

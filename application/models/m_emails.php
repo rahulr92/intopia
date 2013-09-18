@@ -273,9 +273,31 @@ public function get_post_rstatus($post_id){
 
 $this->db->where('post_id', $post_id);
 $this->db->where('status', 0);
+$this->db->where('sender_id !=', $this->session->userdata('user_id'));
 $query = $this->db->get('emails');
 if($query->num_rows() > 0) return 0; //there are unread messages for that post
 return 1; 
+}
+
+public function get_last_sender($post_id,$thread_id){
+
+$this->db->where('post_id', $post_id);
+$this->db->where('thread_id', $thread_id);
+$this->db->order_by('timestamp', 'asc');
+$query = $this->db->get('emails');
+
+if($query->num_rows() > 0) {
+	return $query->last_row()->sender_id;
+}
+}
+
+public function get_thread_sender($thread_id){
+$this->db->where('thread_id', $thread_id);
+$query = $this->db->get('threads');
+
+if($query->num_rows() > 0) {
+	return $query->last_row()->person1_id;
+}
 }
 
 
