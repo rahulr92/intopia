@@ -59,6 +59,8 @@
 
                         }
                     }
+                    else
+                          echo "<a class='navbar-brand' >Intopia Listing</a>";
                    ?>
               </ul>
               <ul class="nav pull-right">

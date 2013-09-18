@@ -79,6 +79,10 @@ $(function() {
         $('#status_toggle_flag').val('1');
         $('#submit_reply').prop('disabled', true);
       }
+      else
+      {
+        $('#submit_reply').prop('disabled', false);
+      }
       if(window.user_id == post_user_id)
       {
         $('.non_owner').hide();

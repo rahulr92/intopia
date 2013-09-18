@@ -1,5 +1,6 @@
 <h1>Conversation for: <?php echo $post->title; ?></h1>
 <?php
+//print_r($users);
  $user_id = $this->session->userdata('user_id');
 $msg_url = base_url('index.php/main/reply_thread');
 $post_id = $post->post_id;
@@ -9,7 +10,7 @@ $sender_id= 0;
 			$receiver_id = $thread->receiver_id;
 			$date = date('D, M j Y g:i A', strtotime($thread->timestamp));
 			echo "<span>$users[$sender_id] to $users[$receiver_id]</span>";
-			echo "</br><span>$date</span>";
+			echo "<span class='pull-right'>$date</span>";
  			echo "<p>$thread->msg</p><hr>";
 		}
 

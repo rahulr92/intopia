@@ -220,7 +220,7 @@ public function send_mail($user_id,$post_id,$thread_id){
 
 $this->load->library('email');
 
-$email_id = "rahulr92@gmail.com";
+$email_id = $this->get_username($user_id);
 $url = base_url("index.php/login/show_thread/$user_id/$post_id/$thread_id");
 $msg = "You have a new message at Intopia Listing.\r\n 
 	Click here to view it: $url";

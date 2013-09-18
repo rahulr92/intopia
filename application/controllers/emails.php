@@ -51,10 +51,4 @@ class Emails extends CI_Controller {
 			 $this->load->view('template',$data);
 	}
 
-	public function last_sender($post_id,$thread_id){
-		
-	$this->M_emails->get_last_sender($post_id,$thread_id);
-			
-	}
-
 }

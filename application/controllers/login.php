@@ -32,6 +32,13 @@ class Login extends CI_Controller {
 
 	public function show_thread($user_id,$post_id,$thread_id)
 	{
+		if($this->session->userdata('user_id')== $user_id){
+			redirect("/emails/thread_view/$post_id/$thread_id",'location',301);
+		}
+		else{
+			$this->session->sess_destroy();
+		}
+
 		$thread_details = array('user_id' => $user_id,
 						'post_id' => $post_id,'thread_id' => $thread_id);
 		$data = array('title' => 'Intopia Listing','main_content' => 'home_v',
