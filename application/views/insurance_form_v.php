@@ -1,24 +1,4 @@
-<table class="table table-hover">
-    <tbody>
-        <?php
-        $insur_detail_url = base_url('index.php/user_forms/view_insurance/'); 
-        $user_id = $this->session->userdata('user_id');
-
-        if(is_array($forms)){
-            echo "<h1>Insurance Form List</h1>";
-        foreach ($forms as $form ) {
-            $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
-            $insurance_id = $form->insurance_id;
-            $period = $form->period_id;
-            echo "<tr";
-            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
-            <td>$date</td>";
-            echo "</tr>";
-        }
-    }
-        ?>
-        </tbody></table>
-
+<br/>
 <button class="btn btn-default" id="apply_insurance_btn">Apply for Insurance</button>
 <div id="apply_insurance_frm" class="">
 
@@ -420,3 +400,24 @@ factory(ies).
 </tbody></table>
 </form>
 </div>
+
+<table class="table table-hover">
+    <tbody>
+        <?php
+        $insur_detail_url = base_url('index.php/user_forms/view_insurance/'); 
+        $user_id = $this->session->userdata('user_id');
+
+        if(is_array($forms)){
+            echo "<h1>Insurance Form List</h1>";
+        foreach ($forms as $form ) {
+            $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
+            $insurance_id = $form->insurance_id;
+            $period = $form->period_id;
+            echo "<tr";
+            echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
+            <td>$date</td>";
+            echo "</tr>";
+        }
+    }
+        ?>
+        </tbody></table>
