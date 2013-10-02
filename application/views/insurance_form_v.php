@@ -12,18 +12,24 @@
     <td>Period<font style="color:red">*</font>:</td>
     <td><select id="ins_period" name="period">
     		<option value="0" selected="">Select Period</option>
-            <option value="1">Q1</option>
-    		<option value="2">Q2</option>
-    		<option value="3">Q3</option>
-    		<option value="4">Q4</option>
-    		<option value="5">Q5</option>
-    		<option value="6">Q6</option>
-    		<option value="7">Q7</option>
-    		<option value="8">Q8</option>
-    		<option value="9">Q9</option>
-    		<option value="10">Q10</option>
-    		<option value="11">Q11</option>
-    		<option value="12">Q12</option>
+           <?php 
+foreach ($rates as $rate) {
+    echo  "<option value='$rate->quarter_id' 
+    data-us_inven_rt='$rate->us_inven_rt'
+    data-us_chip_rt='$rate->us_chip_rt'
+    data-us_pc_rt='$rate->us_pc_rt'
+    data-ec_inven_rt='$rate->ec_inven_rt'
+    data-ec_chip_rt='$rate->ec_chip_rt'
+    data-ec_pc_rt='$rate->ec_pc_rt'
+    data-br_inven_rt='$rate->br_inven_rt'
+    data-br_chip_rt='$rate->br_chip_rt'
+    data-br_pc_rt='$rate->br_pc_rt'
+
+    >Q$rate->quarter_id</option>";
+    # code...
+}
+
+?>
         </select></td>
   </tr>
   <tr>
@@ -108,7 +114,7 @@
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><input type="text" name="us_inven_rt" value=".02" readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -140,7 +146,7 @@
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><input type="text" name="ec_inven_rt" value=".02" readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -172,7 +178,7 @@
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><input type="text" name="br_inven_rt" value=".02" readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
 </tbody></table>
@@ -218,7 +224,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td class ="rates_val">120</td>
+    <td class ="rates_val" ><input type="text" name="us_chip_rt" value="120" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -245,7 +251,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td  class ="rates_val">100</td>
+    <td  class ="rates_val"><input type="text" name="ec_chip_rt" value="100" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -272,7 +278,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td  class ="rates_val">50</td>
+    <td  class ="rates_val"><input type="text" name="br_chip_rt" value="50" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -299,7 +305,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td  class ="rates_val">100</td>
+    <td  class ="rates_val"><input type="text" name="us_pc_rt" value="100" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -326,7 +332,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td  class ="rates_val">90</td>
+    <td  class ="rates_val"><input type="text" name="ec_pc_rt" value="90" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -353,7 +359,7 @@
     		<option value="17">17</option>
     		<option value="18">18</option>
         </select></td>
-    <td  class ="rates_val">60</td>
+    <td  class ="rates_val" ><input type="text" name="br_pc_rt" value="60" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
 </tbody></table><br><br>

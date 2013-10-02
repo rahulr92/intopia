@@ -21,6 +21,11 @@ class User_forms extends CI_Controller {
 		$forms = $this->M_forms->get_all_nec_frms();
 		$data = array('title' => 'Insurance Forms','main_content' => 'nec_form_list_v', 'forms' =>$forms);
 		$this->load->view('template',$data);
+		} else if ($type =="rates")
+		{
+		$rates = $this->M_forms->get_all_insurance_rates();
+		$data = array('title' => 'Insurance Forms','main_content' => 'rates_v', 'rates' =>$rates);
+		$this->load->view('template',$data);
 		} else
 		{
 		$forms = $this->M_forms->get_all_insurance_frms();
@@ -37,7 +42,8 @@ class User_forms extends CI_Controller {
 		
 		$user_id = $this->session->userdata('user_id');
 		$forms = $this->M_forms->get_insurance_frms($user_id);
-		$data = array('title' => 'Insurance Forms','main_content' => 'insurance_form_v', 'forms' =>$forms);
+		$rates = $this->M_forms->get_all_insurance_rates();
+		$data = array('title' => 'Insurance Forms','main_content' => 'insurance_form_v', 'forms' =>$forms, 'rates' =>$rates);
 		$this->load->view('template',$data);
 	}
 
@@ -76,7 +82,17 @@ class User_forms extends CI_Controller {
 				'br_chip_no'	=>	$this->input->post('chip-plants-br'),
 				'us_pc_no'	=>	$this->input->post('pc-plants-us'),
 				'ec_pc_no'	=>	$this->input->post('pc-plants-ec'),
-				'br_pc_no'	=>	$this->input->post('pc-plants-br')
+				'br_pc_no'	=>	$this->input->post('pc-plants-br'),
+				'us_inven_rt'	=>	$this->input->post('us_inven_rt'),
+				'ec_inven_rt'	=>	$this->input->post('ec_inven_rt'),
+				'br_inven_rt'	=>	$this->input->post('br_inven_rt'),
+				'us_chip_rt'	=>	$this->input->post('us_chip_rt'),
+				'ec_chip_rt'	=>	$this->input->post('ec_chip_rt'),
+				'br_chip_rt'	=>	$this->input->post('br_chip_rt'),
+				'us_pc_rt'	=>	$this->input->post('us_pc_rt'),
+				'ec_pc_rt'	=>	$this->input->post('ec_pc_rt'),
+				'br_pc_rt'	=>	$this->input->post('br_pc_rt')
+
 				);
 			
 			if($this->M_forms->submit_insurance_frm($data)){
@@ -88,7 +104,7 @@ class User_forms extends CI_Controller {
 			}
 
 					$this->session->set_flashdata('alert_msg', $msg );
-					redirect('/user_forms/nec','location',301);
+					redirect('/user_forms/insurance','location',301);
 
 	}
 
@@ -130,6 +146,35 @@ class User_forms extends CI_Controller {
 					$this->session->set_flashdata('alert_msg', $msg );
 					redirect('/user_forms/nec','location',301);
 
+	}
+
+		public function update_rates()
+	{		
+				$quarter_id 	=	$this->input->post('quarter_id');
+
+			$data = array(
+				'us_inven_rt'	=>	$this->input->post('us_inven_rt'),
+				'ec_inven_rt'	=>	$this->input->post('ec_inven_rt'),
+				'br_inven_rt'	=>	$this->input->post('br_inven_rt'),
+				'us_chip_rt'	=>	$this->input->post('us_chip_rt'),
+				'ec_chip_rt'	=>	$this->input->post('ec_chip_rt'),
+				'br_chip_rt'	=>	$this->input->post('br_chip_rt'),
+				'us_pc_rt'	=>	$this->input->post('us_pc_rt'),
+				'ec_pc_rt'	=>	$this->input->post('ec_pc_rt'),
+				'br_pc_rt'	=>	$this->input->post('br_pc_rt')
+				);
+			
+			$report = $this->M_forms->update_rates($data, $quarter_id);
+
+			if(!$report['error']){
+							$msg =  "Rates successfully submitted.";
+			} else
+			{
+						$msg =  "Invalid data. Updation failed!";
+
+			}
+					$this->session->set_flashdata('alert_msg', $msg );
+					redirect('/user_forms/admin/rates','location',301);
 	}
 
 }

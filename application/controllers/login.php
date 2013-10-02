@@ -24,6 +24,8 @@ class Login extends CI_Controller {
 		}
 		else
 			{
+				$msg =  "Incorrect username or password! Please try again.";
+				$this->session->set_flashdata('alert_msg', $msg );
 			redirect('/login/','location',301);
 			}
 

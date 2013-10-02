@@ -33,4 +33,4 @@ if(isset($thread_details)){
         </form>
         <a href="<?php echo base_url('index.php/login/forgot'); ?>">Forgot your password?</a></br>
         <?php
-        if(isset($team_count)){if($team_count < 12) { echo "<a href=".base_url('index.php/register').">Register</a>"; }}?></br>
+        if(isset($team_count)){if($team_count < $this->config->item('team_no')) { echo "<a href=".base_url('index.php/register').">Register</a>"; }}?></br>

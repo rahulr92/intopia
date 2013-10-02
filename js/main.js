@@ -167,14 +167,14 @@ function timestamp_to_date(arg){
 
  $('.inventory_val').change(function(){
   var inventory_val = $(this).val();
-  var rates_val = $(this).parent().siblings('.rates_val').html();
+  var rates_val = $(this).parent().siblings('.rates_val').children().val();
   $(this).parent().siblings('.premium_val').html(inventory_val*rates_val);
   calc_total();
 });
 
  $('.plant_no').change(function(){
   var inventory_val = $(this).val();
-  var rates_val = $(this).parent().siblings('.rates_val').html();
+  var rates_val = $(this).parent().siblings('.rates_val').children().val();
   $(this).parent().siblings('.premium_val').html(inventory_val*rates_val);
   calc_total();
 });
@@ -285,4 +285,31 @@ $('#apply_insurance_btn').click( function(){
 
 $('#apply_nec_btn').click( function(){
   $('#apply_nec_frm').slideToggle();
+});
+
+$('#rate-select').change( function(){
+    var selected = $(this).find('option:selected'); 
+    $('input[name="us_inven_rt"]').val(selected.data('us_inven_rt'));
+    $('input[name="us_chip_rt"]').val(selected.data('us_chip_rt'));
+    $('input[name="us_pc_rt"]').val(selected.data('us_pc_rt'));
+    $('input[name="ec_inven_rt"]').val(selected.data('ec_inven_rt'));
+    $('input[name="ec_chip_rt"]').val(selected.data('ec_chip_rt'));
+    $('input[name="ec_pc_rt"]').val(selected.data('ec_pc_rt'));
+    $('input[name="br_inven_rt"]').val(selected.data('br_inven_rt'));
+    $('input[name="br_chip_rt"]').val(selected.data('br_chip_rt'));
+    $('input[name="br_pc_rt"]').val(selected.data('br_pc_rt'));
+});
+
+
+$('#ins_period').change( function(){
+    var selected = $(this).find('option:selected'); 
+      $('input[name="us_inven_rt"]').val(selected.data('us_inven_rt'));
+    $('input[name="us_chip_rt"]').val(selected.data('us_chip_rt'));
+    $('input[name="us_pc_rt"]').val(selected.data('us_pc_rt'));
+    $('input[name="ec_inven_rt"]').val(selected.data('ec_inven_rt'));
+    $('input[name="ec_chip_rt"]').val(selected.data('ec_chip_rt'));
+    $('input[name="ec_pc_rt"]').val(selected.data('ec_pc_rt'));
+    $('input[name="br_inven_rt"]').val(selected.data('br_inven_rt'));
+    $('input[name="br_chip_rt"]').val(selected.data('br_chip_rt'));
+    $('input[name="br_pc_rt"]').val(selected.data('br_pc_rt'));
 });

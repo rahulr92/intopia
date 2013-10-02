@@ -31,7 +31,9 @@ class Main extends CI_Controller {
 	}
 
 	public function admin(){
-	$this->get_posts();
+		$data_all = array('title' => 'Intopia','main_content' => 'admin_v');
+		$this->load->view('template',$data_all);
+	//$this->get_posts();
 	}
 
 	public function edit_prof()
@@ -48,7 +50,10 @@ class Main extends CI_Controller {
 		$npswd= $this->input->post('npassword');
 		$cnpswd= $this->input->post('cnpassword');
 		$teamname = $this->input->post('teamname');
-		if($npswd == $cnpswd) $pswd = $npswd;
+		if($npswd)
+		{
+		if($npswd == $cnpswd) $pswd = $npswd;	
+		}
 		$reg_details = array('username' => $uname,
 								'password' => $pswd,
 								'teamno' =>$this->input->post('teamno'),
@@ -231,7 +236,7 @@ class Main extends CI_Controller {
 
 			$post_id = $row->post_id;
 			$post_user_id = $row->user_id;
-			$post_teamname = "Anonymous";
+			$post_teamname = ($post_user_id==$user_id)? "Anonymously by me":"Anonymous";
 			if(!$row->anony_flag)
 			{
 				if($this->M_emails->is_post_visible($post_id,$user_id))

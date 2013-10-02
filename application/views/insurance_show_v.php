@@ -1,7 +1,7 @@
  </br>
    <?php      
    if ($this->session->userdata('username') === "admin@intopia.com")
-        $insur_url = base_url('index.php/user_forms/admin'); 
+        $insur_url = base_url('index.php/user_forms/admin/insurance'); 
     else        
          $insur_url = base_url('index.php/user_forms/'); 
         echo "<a href='$insur_url'>Back to Insurance Form listing page</a>";
@@ -76,7 +76,7 @@
     <td class="inventory_sval">
     		<?php echo $form->us_inventory_sf; ?>          
        </td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><?php echo $form->us_inven_rt; ?></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -85,7 +85,7 @@
     <td class="inventory_sval">
     		<?php echo $form->ec_inventory_sf; ?>
     		</td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><?php echo $form->ec_inven_rt; ?></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -93,7 +93,7 @@
     <td>Inventory</td>
     <td class="inventory_sval">
     		<?php echo $form->br_inventory_sf; ?> </td>
-    <td class="rates_val">.02</td>
+    <td class="rates_val"><?php echo $form->br_inven_rt; ?></td>
    <td class ="premium_val">0</td>
   </tr>
 </tbody></table>
@@ -121,7 +121,7 @@
     <td class ="plant_sno">
     		<?php echo $form->us_chip_no; ?>
     	</td>
-    <td class ="rates_val">120</td>
+    <td class ="rates_val"><?php echo $form->us_chip_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -130,7 +130,7 @@
     <td class ="plant_sno">
     		<?php echo $form->ec_chip_no; ?>
     		</td>
-    <td  class ="rates_val">100</td>
+    <td  class ="rates_val"><?php echo $form->ec_chip_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -139,7 +139,7 @@
     <td class ="plant_sno">
     		<?php echo $form->us_chip_no; ?>
     		</td>
-    <td  class ="rates_val">50</td>
+    <td  class ="rates_val"><?php echo $form->br_chip_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -148,7 +148,7 @@
     <td class ="plant_sno">
     		<?php echo $form->us_pc_no; ?>
     		</td>
-    <td  class ="rates_val">100</td>
+    <td  class ="rates_val"><?php echo $form->us_pc_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -157,7 +157,7 @@
     <td class ="plant_sno">
     		<?php echo $form->ec_pc_no; ?>
     		</td>
-    <td  class ="rates_val">90</td>
+    <td  class ="rates_val"><?php echo $form->ec_pc_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -166,7 +166,7 @@
     <td class ="plant_sno">
     		<?php echo $form->br_pc_no; ?>
     	</td>
-    <td  class ="rates_val">60</td>
+    <td  class ="rates_val"><?php echo $form->br_pc_rt; ?></td>
     <td class ="premium_val">0</td>
   </tr>
 </tbody></table><br><br>

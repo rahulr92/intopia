@@ -57,6 +57,21 @@ return $query->result();
 	return $query->last_row();
 	}
 
+		public function get_all_insurance_rates(){
+	$query = $this->db->get('rates_table');
+	return $query->result();
+
+	}
+
+	public function update_rates($data,$qid){
+	$this->db->where('quarter_id',$qid);
+	$this->db->update('rates_table',$data);
+
+	 $report = array();
+    $report['error'] = $this->db->_error_number();
+    $report['message'] = $this->db->_error_message();
+    return $report;
+	}
 
 
 }
