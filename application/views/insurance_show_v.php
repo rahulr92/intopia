@@ -3,7 +3,7 @@
    if ($this->session->userdata('username') === "admin@intopia.com")
         $insur_url = base_url('index.php/user_forms/admin/insurance'); 
     else        
-         $insur_url = base_url('index.php/user_forms/'); 
+         $insur_url = base_url('index.php/user_forms/insurance'); 
         echo "<a href='$insur_url'>Back to Insurance Form listing page</a>";
         $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
 ?>
@@ -29,7 +29,7 @@
   </tr>
   <tr>
     <td nowrap="">Company Sending Cash:</td>
-    <td><input type="text" name="company-sending-cash" value="<?php echo $this->Model->get_teamname($form->user_id); ?>" disabled=""></td>
+    <td><input type="text" name="company-sending-cash" value="<?php echo $this->Model->get_teamname($form->user_id).' ('.$form->user_id.')'; ?>" disabled=""></td>
   </tr>
   <tr>
     <td nowrap="">Area Sending Money from:</td>
@@ -137,7 +137,7 @@
     <td>3 - BR</td>
     <td>Chip Plant</td>
     <td class ="plant_sno">
-    		<?php echo $form->us_chip_no; ?>
+    		<?php echo $form->br_chip_no; ?>
     		</td>
     <td  class ="rates_val"><?php echo $form->br_chip_rt; ?></td>
     <td class ="premium_val">0</td>
@@ -177,4 +177,3 @@
 </tbody></table><br><br>
 </form>
 </div>
-

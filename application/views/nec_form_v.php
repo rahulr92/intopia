@@ -25,7 +25,7 @@
         <option value="12">Q12</option>
         </select></td>
   </tr>
-  <tr>
+  <tr  class="hidden">
     <td>Period to Execute:</td>
     <td><select name="period-executed">
         <option value="0" selected="selected">now</option>
@@ -49,7 +49,7 @@
   </tr>
   <tr>
     <td>Buyer Company:</td>
-    <td><?php echo $this->session->userdata('teamname'); ?></td>
+    <td><?php echo $this->session->userdata('teamname').' ('.$this->session->userdata('teamno').')'; ?></td>
   </tr>
   <tr>
     <td nowrap="nowrap">Area goods transferred FROM<font style="color:red;">*</font>:</td>
@@ -115,7 +115,7 @@
   </tr>
   <tr>
     <td style="text-align:right;">Cash<font style="color:red;">*</font>:</td>
-    <td><input type="text" name="cash-payment" style="width:50px;" />%</td>
+    <td><input type="text" name="cash-payment" value="100" style="width:50px;" />%</td>
   </tr>
   <tr>
     <td style="text-align:right;">A/P1:</td>
@@ -162,7 +162,7 @@
 </table>
 </div>
 
-<table class="table table-hover">
+<table class="table table-hover text-center">
     <tbody>
        
         <?php
@@ -175,7 +175,7 @@
                 <tr>
                   <th>Period Applied In</th>
                   <th>NEC Purchase Agreement</th>
-                   <th>When to execute</th>
+                   <th  class='hidden'>When to execute</th>
                   <th>Submitted Time</th>
                 </tr>
               </thead>
@@ -189,7 +189,7 @@
             echo "<tr>";
             echo "<td>Q$curr_period</td>";
             echo "<td><a href='$nec_detail_url/$nec_id'>View Agreement</a></td>
-                  <td>$exec_period</td>
+                  <td  class='hidden'>$exec_period</td>
                   <td>$date</td>";
             echo "</tr>";
         }

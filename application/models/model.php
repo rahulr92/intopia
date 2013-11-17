@@ -12,7 +12,8 @@ class Model extends CI_Model {
 
 	public function get_teams(){
 		$this->db->select('teamname,user_id');
-		$query = $this->db->order_by('teamno','asc');
+		$this->db->where("user_id !=","16");
+		$this->db->order_by('teamno','asc');
 		$query = $this->db->get('users');
 		if($query->num_rows() > 0)
 			return $query->result();

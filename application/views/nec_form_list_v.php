@@ -11,7 +11,7 @@
                 <th>Team Name</th>
                   <th>Period Applied In</th>
                   <th>NEC Purchase Agreement</th>
-                   <th>When to execute</th>
+                   <th class='hidden'>When to execute</th>
                   <th>Submitted Time</th>
                 </tr>
               </thead>
@@ -28,7 +28,7 @@
             echo "<tr> <td>$teamname</td>";
             echo "<td>Q$curr_period</td>";
             echo "<td><a href='$nec_detail_url/$nec_id'>View Agreement</a></td>
-                  <td>$exec_period</td>
+                  <td class='hidden'>$exec_period</td>
                   <td>$date</td>";
             echo "</tr>";
 

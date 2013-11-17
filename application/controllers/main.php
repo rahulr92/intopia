@@ -27,7 +27,8 @@ class Main extends CI_Controller {
 			redirect('/login/','location',301);
 		}
 		else
-			$this->get_posts();
+		redirect('/user_forms/insurance','location',301);
+			//$this->get_posts();
 	}
 
 	public function admin(){
@@ -68,6 +69,8 @@ class Main extends CI_Controller {
 			$msg =  "Invalid data. Update failed.";
 				
 		$this->session->set_flashdata('alert_msg', $msg );
+		if($user_id == 16)
+			redirect('/main/admin','location',301);
 		redirect('/main/','location',301);
 
 	}

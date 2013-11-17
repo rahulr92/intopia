@@ -18,7 +18,7 @@
     <td>Current Period<font style="color:red;">*</font>:</td>
     <td>Q<?php echo $form->current_period_id; ?></td>
   </tr>
-  <tr>
+  <tr class="hidden">
     <td>Period to Execute:</td>
     <td><?php echo($form->exe_period_id==0)?"Now": "Q$form->exe_period_id"; ?></td>
   </tr>
@@ -28,7 +28,7 @@
   </tr>
   <tr>
     <td>Buyer Company:</td>
-    <td><?php echo $this->Model->get_teamname($form->user_id); ?></td>
+    <td><?php echo $this->Model->get_teamname($form->user_id).' ('.$form->user_id.')'; ?></td>
   </tr>
   <tr>
     <td nowrap="nowrap">Area goods transferred FROM<font style="color:red;">*</font>:</td>

@@ -26,6 +26,11 @@ class User_forms extends CI_Controller {
 		$rates = $this->M_forms->get_all_insurance_rates();
 		$data = array('title' => 'Insurance Forms','main_content' => 'rates_v', 'rates' =>$rates);
 		$this->load->view('template',$data);
+		}else if ($type =="w1s")
+		{
+		$forms = $this->M_forms->get_all_w1s_frms();
+		$data = array('title' => 'W1s Forms','main_content' => 'w1s_list_v', 'forms' =>$forms);
+		$this->load->view('template',$data);
 		} else
 		{
 		$forms = $this->M_forms->get_all_insurance_frms();
@@ -52,10 +57,19 @@ class User_forms extends CI_Controller {
 		
 		$user_id = $this->session->userdata('user_id');
 		$forms = $this->M_forms->get_nec_frms($user_id);
-		$data = array('title' => 'Insurance Forms','main_content' => 'nec_form_v', 'forms' =>$forms);
+		$data = array('title' => 'NEC Forms','main_content' => 'nec_form_v', 'forms' =>$forms);
 		$this->load->view('template',$data);
 	}
 
+		public function w1s()
+	{
+		
+		$user_id = $this->session->userdata('user_id');
+		$forms = $this->M_forms->get_w1s_frms($user_id);
+		$teams = $this->Model->get_teams();
+		$data = array('title' => 'W1s Forms','main_content' => 'w1s_form_v', 'forms' =>$forms, 'teams' => $teams);
+		$this->load->view('template',$data);
+	}
 
 
 
@@ -69,6 +83,8 @@ class User_forms extends CI_Controller {
 
 		public function submit_insurance_frm()
 	{
+	if($this->session->userdata('user_id'))
+		{
 			$data = array(
 				'user_id' => $this->session->userdata('user_id'),
 				'period_id' => $this->input->post('period'),
@@ -105,6 +121,12 @@ class User_forms extends CI_Controller {
 
 					$this->session->set_flashdata('alert_msg', $msg );
 					redirect('/user_forms/insurance','location',301);
+			}
+			else
+			{
+				$url = base_url('index.php/login');
+				echo "<h1>Session timed out! Please <a href='$url'>relogin</a> to submit this form!</h1>";
+			}
 
 	}
 
@@ -118,6 +140,8 @@ class User_forms extends CI_Controller {
 
 		public function submit_nec_frm()
 	{
+	if($this->session->userdata('user_id'))
+		{
 			$data = array(
 				'user_id' => $this->session->userdata('user_id'),
 				'current_period_id' => $this->input->post('period'),
@@ -146,6 +170,12 @@ class User_forms extends CI_Controller {
 					$this->session->set_flashdata('alert_msg', $msg );
 					redirect('/user_forms/nec','location',301);
 
+		}
+		else
+			{
+				$url = base_url('index.php/login');
+				echo "<h1>Session timed out! Please <a href='$url'>relogin</a> to submit this form!</h1>";
+			}
 	}
 
 		public function update_rates()
@@ -175,6 +205,46 @@ class User_forms extends CI_Controller {
 			}
 					$this->session->set_flashdata('alert_msg', $msg );
 					redirect('/user_forms/admin/rates','location',301);
+	}
+	
+public function submit_w1s_frm()
+	{
+	if($this->session->userdata('user_id'))
+		{
+			$data = array(
+				'user_id' => $this->session->userdata('user_id'),
+				'sending_user_id' => $this->input->post('sending_team'),
+				'period_id' => $this->input->post('period'),
+				'area_from_id' => $this->input->post('area-from'),
+				'area_to_id' => $this->input->post('area-to'),
+				'currency_id'	=>	$this->input->post('nec-currency-no'),
+				'amount'	=> 	$this->input->post('amount'),
+				'special_ins'	=> 	$this->input->post('special_ins')
+				);
+			
+			if($this->M_forms->submit_w1s_frm($data)){
+							$msg =  "W1s form successfully submitted.";
+			} else
+			{
+						$msg =  "Invalid data. Submission failed!";
+
+			}
+					$this->session->set_flashdata('alert_msg', $msg );
+					redirect('/user_forms/w1s','location',301);
+
+		}
+		else
+			{
+				$url = base_url('index.php/login');
+				echo "<h1>Session timed out! Please <a href='$url'>relogin</a> to submit this form!</h1>";
+			}
+	}
+
+		public function view_w1s($w1s_id)
+	{
+		$form = $this->M_forms->get_w1s_frm($w1s_id);
+		$data = array('title' => 'Intopia Listing','main_content' => 'w1s_show_v','form'=>$form);
+		$this->load->view('template',$data);
 	}
 
 }

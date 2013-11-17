@@ -12,7 +12,8 @@ class M_login extends CI_Model {
 			$newdata = array(
                    'username'  => $uname,
                    'user_id' => $query->last_row()->user_id,
-                   	'teamname' => $query->last_row()->teamname
+                   	'teamname' => $query->last_row()->teamname,
+                   	'teamno' => $query->last_row()->teamno
                );
 			$this->session->set_userdata($newdata);
 		 	return 1;

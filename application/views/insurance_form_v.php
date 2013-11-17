@@ -42,26 +42,22 @@ foreach ($rates as $rate) {
   </tr>
   <tr>
     <td nowrap="">Company Sending Cash:</td>
-    <td><input type="text" name="company-sending-cash" value="<?php echo $this->session->userdata('teamname'); ?>" disabled=""></td>
+    <td><input type="text" name="company-sending-cash" value="<?php echo $this->session->userdata('teamname').' ('.$this->session->userdata('teamno').')'; ?>" disabled=""></td>
   </tr>
   <tr>
-    <td nowrap="">Area Sending Money from<font style="color:red">*</font>:</td>
-    <td><select id="area-sending" name="area-sending">
-    		<option value="0" selected="">Select Area</option>
-            <option value="4">Home Office (4)</option>
-    		<option value="1">US (1)</option>
-    		<option value="2">EC (2)</option>
-    		<option value="3">BR (3)</option>
+    <td nowrap="">Area Sending Money from<font style="color:red"></font>:</td>
+    <td><select id="area-sending" name="area-sending" readonly>
+    		
+            <option value="4" selected="">Home Office (4)</option>
+    		
         </select></td>
   </tr>
   <tr>
-    <td nowrap="">Payment Currency in<font style="color:red">*</font>:</td>
-    <td><select  id="currency-no" name="currency-no">
-            <option value="0" selected="">Select Currency</option>
-    		<option value="4">Francs (4)</option>
-    		<option value="1">Dollars (1)</option>
-    		<option value="2">Euros (2)</option>
-    		<option value="3">Reais (3)</option>
+    <td nowrap="">Payment Currency in<font style="color:red"></font>:</td>
+    <td><select  id="currency-no" name="currency-no" readonly>
+         
+    		<option value="4" selected="">Francs (4)</option>
+    		
         </select></td>
   </tr>
   <tr>
@@ -114,7 +110,7 @@ foreach ($rates as $rate) {
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val"><input type="text" name="us_inven_rt" value=".02" readonly/></td>
+    <td class="rates_val"><input type="text" name="us_inven_rt"  readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -146,7 +142,7 @@ foreach ($rates as $rate) {
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val"><input type="text" name="ec_inven_rt" value=".02" readonly/></td>
+    <td class="rates_val"><input type="text" name="ec_inven_rt"  readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -178,7 +174,7 @@ foreach ($rates as $rate) {
     		<option value="5750">5750</option>
     		<option value="6000">6000</option>
         </select></td>
-    <td class="rates_val"><input type="text" name="br_inven_rt" value=".02" readonly/></td>
+    <td class="rates_val"><input type="text" name="br_inven_rt" readonly/></td>
    <td class ="premium_val">0</td>
   </tr>
 </tbody></table>
@@ -208,23 +204,8 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
         </select></td>
-    <td class ="rates_val" ><input type="text" name="us_chip_rt" value="120" readonly/></td>
+    <td class ="rates_val" ><input type="text" name="us_chip_rt" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -235,23 +216,9 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
+    		
         </select></td>
-    <td  class ="rates_val"><input type="text" name="ec_chip_rt" value="100" readonly/></td>
+    <td  class ="rates_val"><input type="text" name="ec_chip_rt" readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -262,23 +229,9 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
+    		
         </select></td>
-    <td  class ="rates_val"><input type="text" name="br_chip_rt" value="50" readonly/></td>
+    <td  class ="rates_val"><input type="text" name="br_chip_rt"  readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -289,23 +242,9 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
+    		
         </select></td>
-    <td  class ="rates_val"><input type="text" name="us_pc_rt" value="100" readonly/></td>
+    <td  class ="rates_val"><input type="text" name="us_pc_rt"  readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -316,23 +255,9 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
+    		
         </select></td>
-    <td  class ="rates_val"><input type="text" name="ec_pc_rt" value="90" readonly/></td>
+    <td  class ="rates_val"><input type="text" name="ec_pc_rt"  readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
   <tr>
@@ -343,23 +268,9 @@ foreach ($rates as $rate) {
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
-    		<option value="4">4</option>
-    		<option value="5">5</option>
-    		<option value="6">6</option>
-    		<option value="7">7</option>
-    		<option value="8">8</option>
-    		<option value="9">9</option>
-    		<option value="10">10</option>
-    		<option value="11">11</option>
-    		<option value="12">12</option>
-    		<option value="13">13</option>
-    		<option value="14">14</option>
-    		<option value="15">15</option>
-    		<option value="16">16</option>
-    		<option value="17">17</option>
-    		<option value="18">18</option>
+    		
         </select></td>
-    <td  class ="rates_val" ><input type="text" name="br_pc_rt" value="60" readonly/></td>
+    <td  class ="rates_val" ><input type="text" name="br_pc_rt"  readonly/></td>
     <td class ="premium_val">0</td>
   </tr>
 </tbody></table><br><br>
@@ -416,12 +327,18 @@ factory(ies).
         if(is_array($forms)){
             echo "<h1>Insurance Form List</h1>";
         foreach ($forms as $form ) {
-            $date = date('D, M j Y g:i A', strtotime($form->timestamp ));
+	        //date_default_timezone_set('EST');
+            $date = date('D, M j Y g:i A', strtotime($form->timestamp));
+            /*
+            $time = time($date);
+            $est_time = $time + 3*60*60;
+            $est_date = date('D, M j Y g:i A', $est_time);
+            */
             $insurance_id = $form->insurance_id;
             $period = $form->period_id;
             echo "<tr";
             echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
-            <td>$date</td>";
+            <td>$date PST</td>";
             echo "</tr>";
         }
     }
