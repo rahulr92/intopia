@@ -14,7 +14,7 @@
             $period = $form->period_id;
             echo "<tr";
             echo "><td><a href='$insur_detail_url/$insurance_id'>Q$period Insurance</a></td>
-            <td>$teamname</td>
+            <td>$teamname ($user_id)</td>
             <td>$date</td>";
             echo "</tr>";
 			echo "<tr";

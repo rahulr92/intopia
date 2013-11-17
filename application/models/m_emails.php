@@ -216,6 +216,8 @@ $thread_id = $data['thread_id'];
 $this->send_mail($user_id,$post_id,$thread_id);
 $this->db->insert('emails',$data);
 }
+
+
 public function send_mail($user_id,$post_id,$thread_id){
 
 $this->load->library('email');

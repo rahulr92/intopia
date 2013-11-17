@@ -65,9 +65,9 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 $db['prod']['hostname'] = 'localhost';
-$db['prod']['username'] = 'root';
-$db['prod']['password'] = '';
-$db['prod']['database'] = 'intopia_db';
+$db['prod']['username'] = 'trongac_root';
+$db['prod']['password'] = 'intopia_db';
+$db['prod']['database'] = 'trongac_intopia_db';
 $db['prod']['dbdriver'] = 'mysql';
 $db['prod']['dbprefix'] = '';
 $db['prod']['pconnect'] = TRUE;

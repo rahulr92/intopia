@@ -15,7 +15,7 @@
         <label for="title">Team number</label> 
         <select class="form-control"  name="teamno" >
             <?php
-            for($i =1; $i<=12; $i++){
+            for($i =0; $i<=12; $i++){
              echo "<option value='$i'";
               if ($i == $team->teamno) echo "selected='selected'";
               echo ">Team $i</option>"; 

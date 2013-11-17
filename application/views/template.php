@@ -47,17 +47,28 @@
                         echo "<a class='navbar-brand' href=".base_url('index.php/main/admin').">Intopia Marketplace</a>";
                         echo "<li><a href='".base_url('index.php/user_forms/admin/insurance')."'>Insurance Forms</a>";
                         echo "<li><a href='".base_url('index.php/user_forms/admin/nec')."'>NEC Forms</a>";
+                         echo "<li><a href='".base_url('index.php/user_forms/admin/w1s')."'>W1S Forms</a>";
                         echo "<li><a href='".base_url('index.php/user_forms/admin/rates')."'>Change rates</a>";
+                        
 
 
                         }
                         else
                         {
+                        /*
                     echo "<a class='navbar-brand' href=".base_url('index.php/main').">Intopia Marketplace</a>";
                      echo "<li><a href='".base_url('index.php/main/posting')."'>New Post</a></li>"; 
                     echo "<li><a href='".base_url('index.php/emails/list_mails')."'>Messages</a></li>";
                     echo "<li><a href='".base_url('index.php/user_forms/insurance')."'>Insurance Forms</a></li>";
                      echo "<li><a href='".base_url('index.php/user_forms/nec')."'>NEC Forms</a></li>";
+                     */
+                       echo "<a class='navbar-brand' href=".base_url('index.php/user_forms/insurance').">Intopia Marketplace</a>";
+                     //echo "<li><a href='".base_url('index.php/main/posting')."'>New Post</a></li>"; 
+                    //echo "<li><a href='".base_url('index.php/emails/list_mails')."'>Messages</a></li>";
+                    echo "<li><a href='".base_url('index.php/user_forms/insurance')."'>Insurance Forms</a></li>";
+                     echo "<li><a href='".base_url('index.php/user_forms/nec')."'>NEC Forms</a></li>";
+                    echo "<li><a href='".base_url('index.php/user_forms/w1s')."'>W1s Forms</a></li>";
+
 
                         }
                     }
